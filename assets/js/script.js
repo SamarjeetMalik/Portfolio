@@ -152,7 +152,7 @@ setInterval(() => {
   for (let i = 0; i < sliders.length; i++) {
     sliders[i].querySelector("[data-slider-next]").click();
   }
-}, 2000);
+}, 4000);
 
 
 
