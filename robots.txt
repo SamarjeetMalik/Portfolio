@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://samarjeetmalik.github.io/Portfolio/sitemap.xml

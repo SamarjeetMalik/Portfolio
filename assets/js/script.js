@@ -173,3 +173,18 @@ window.addEventListener("scroll", function () {
 backTopBtn.addEventListener("click", function () {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+
+
+/**
+ * DARK / LIGHT THEME TOGGLE
+ */
+
+const themeBtn = document.querySelector("[data-theme-btn]");
+
+themeBtn.addEventListener("click", function () {
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+});

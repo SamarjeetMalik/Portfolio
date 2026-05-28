@@ -1142,3 +1142,72 @@ object-fit:fill; }
   border-color: var(--accent);
   color: var(--white);
 }
+
+
+/*-----------------------------------*\
+  #LIGHT THEME
+\*-----------------------------------*/
+
+[data-theme="light"] {
+  --raisin-black: hsla(220, 20%, 92%, 1);
+  --eerie-black:  hsla(220, 20%, 97%, 1);
+  --roman-silver: hsla(229, 12%, 35%, 1);
+  --black:        hsla(0, 0%, 98%, 1);
+  --white:        hsla(231, 10%, 12%, 1);
+  --white_a10:    hsla(231, 10%, 12%, 0.10);
+  --white_a5:     hsla(231, 10%, 12%, 0.05);
+}
+
+/* Navbar slide-panel: keep white bg + dark links in both themes */
+[data-theme="light"] .navbar {
+  background-color: hsla(0, 0%, 100%, 1);
+}
+[data-theme="light"] .navbar-link {
+  color: hsla(231, 10%, 12%, 1);
+}
+
+/* Preloader */
+[data-theme="light"] .preloader {
+  background-color: var(--eerie-black);
+}
+
+/* nav-toggle-btn in light mode */
+[data-theme="light"] .nav-toggle-btn {
+  background-color: hsla(231, 10%, 12%, 1);
+}
+[data-theme="light"] .nav-toggle-btn .line {
+  background-color: hsla(0, 0%, 98%, 1);
+}
+
+
+/*-----------------------------------*\
+  #THEME TOGGLE BUTTON
+\*-----------------------------------*/
+
+.theme-btn {
+  background: transparent;
+  border: 2px solid var(--white_a10);
+  color: var(--white);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-circle);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: var(--transition-1);
+  flex-shrink: 0;
+}
+
+.theme-btn:is(:hover, :focus-visible) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Dark mode → show sun (click to switch to light) */
+.theme-btn ion-icon[name="sunny-outline"] { display: block; }
+.theme-btn ion-icon[name="moon-outline"]  { display: none;  }
+
+/* Light mode → show moon (click to switch to dark) */
+[data-theme="light"] .theme-btn ion-icon[name="sunny-outline"] { display: none;  }
+[data-theme="light"] .theme-btn ion-icon[name="moon-outline"]  { display: block; }
