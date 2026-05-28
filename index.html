@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -56,7 +56,7 @@
     <div class="container">
 
       <a href="#" class="logo">
-        <img src="./assets/images/logo.svg" width="170" height="40" alt="Samarjeet Malik home">
+        <span class="logo-text">SAMARJEET<span class="accent">MALIK</span></span>
       </a>
 
       <button class="nav-toggle-btn" data-nav-toggler data-nav-toggle-btn aria-label="Toggle menu">
@@ -157,7 +157,7 @@
       <section class="section skills" aria-label="our skills">
         <div class="container">
 
-          <p class="section-subtitle">I Make The Future</p>
+
 
           <h2 class="h2 section-title">Physics-Informed Machine Learning Researcher &amp; Emerging-Tech Policy Analyst
           </h2>
@@ -180,49 +180,50 @@
 
             <div>
 
-              <ul class="skills-list">
-
-                <li>
-                  <div class="progress-wrapper">
-                    <p class="progress-label">Physics-Informed ML &amp; GNNs</p>
-                    <data class="progress-value" value="92">92%</data>
+                            <div class="skills-tags">
+                <div>
+                  <span class="skill-cat-label">Research</span>
+                  <div class="tag-group">
+                    <span class="tag">Physics-Informed NNs</span>
+                    <span class="tag">Graph Neural Networks</span>
+                    <span class="tag">Cosmic-Ray Reconstruction</span>
+                    <span class="tag">Astroparticle Physics</span>
+                    <span class="tag">Inverse Problems</span>
                   </div>
-                  <div class="progress-bg">
-                    <div class="progress" style="width: 92%;"></div>
+                </div>
+                <div>
+                  <span class="skill-cat-label">ML / Deep Learning</span>
+                  <div class="tag-group">
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">JAX</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">Geometric DL</span>
+                    <span class="tag">Score Matching</span>
+                    <span class="tag">Diffusion Models</span>
                   </div>
-                </li>
-
-                <li>
-                  <div class="progress-wrapper">
-                    <p class="progress-label">Deep Learning (PyTorch / JAX / TensorFlow)</p>
-                    <data class="progress-value" value="90">90%</data>
+                </div>
+                <div>
+                  <span class="skill-cat-label">Scientific Computing</span>
+                  <div class="tag-group">
+                    <span class="tag">HPC / SLURM</span>
+                    <span class="tag">CUDA</span>
+                    <span class="tag">FEniCS</span>
+                    <span class="tag">COMSOL</span>
+                    <span class="tag">AstroPy</span>
+                    <span class="tag">Monte Carlo</span>
                   </div>
-                  <div class="progress-bg">
-                    <div class="progress" style="width: 90%;"></div>
+                </div>
+                <div>
+                  <span class="skill-cat-label">Policy &amp; Analysis</span>
+                  <div class="tag-group">
+                    <span class="tag">AI Governance</span>
+                    <span class="tag">Tech Policy</span>
+                    <span class="tag">Geopolitics</span>
+                    <span class="tag">Defence &amp; Security</span>
+                    <span class="tag">Quantitative Analysis</span>
                   </div>
-                </li>
-
-                <li>
-                  <div class="progress-wrapper">
-                    <p class="progress-label">Scientific Computing &amp; HPC</p>
-                    <data class="progress-value" value="88">88%</data>
-                  </div>
-                  <div class="progress-bg">
-                    <div class="progress" style="width: 88%;"></div>
-                  </div>
-                </li>
-
-                <li>
-                  <div class="progress-wrapper">
-                    <p class="progress-label">AI &amp; Tech Policy Research</p>
-                    <data class="progress-value" value="85">85%</data>
-                  </div>
-                  <div class="progress-bg">
-                    <div class="progress" style="width: 85%;"></div>
-                  </div>
-                </li>
-
-              </ul>
+                </div>
+              </div>
               <br>
               <br>
               <p class="section-subtitle">Tech Stack</p>
@@ -530,57 +531,10 @@
         </div>
         <ul class="blog-list" style="margin-top:20px">
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-1.jpg" width="300" height="220" loading="lazy"
-                  alt="Real-Time Mapping System" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Real-Time Mapping System</h3>
-                  <p class="card-text">
-                    Developed a real-time SLAM system with cross-platform compatibility, integrating multiple sensors
-                    for accurate localization and mapping. Optimized for real-time performance with sensor fusion,
-                    creating a scalable solution that advances autonomous navigation.
-                  </p>
-                  <p class="card-text">Tech Stack: C++ 95.8% Â· CMake 1.6% Â· Starlark 1.0% Â· Python 0.4%</p>
-                  <a href="https://github.com/SamarjeetMalik/Real-time-mapping" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-2.jpg" width="300" height="220" loading="lazy"
-                  alt="Volumetric Flow Motion Estimation" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Volumetric Flow Motion Estimation</h3>
-                  <p class="card-text">
-                    Implemented an unsupervised deep neural network for volume generation and temporal transport,
-                    with a hybrid loss combining image-based and adversarial approaches â€” achieving stable
-                    long-term estimation for complex phenomena such as smoke plumes.
-                  </p>
-                  <p class="card-text">Tech Stack: C++ 53.8% Â· Python 42.3% Â· C 3.6%</p>
-                  <a href="https://github.com/SamarjeetMalik/Estimating-flow-motion-without-3D-supervision"
-                    class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
           <li>
@@ -637,111 +591,16 @@
           </li>
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-5.jpg" width="300" height="220" loading="lazy"
-                  alt="ShapeFormer Implementation" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">ShapeFormer Implementation</h3>
-                  <p class="card-text">
-                    Transformer-based 3D shape completion using a vector-quantized deep implicit function (VQDIF);
-                    integrated multiscale processing for detail handling and distribution sampling to address
-                    uncertainty, ensuring robust and accurate completions.
-                  </p>
-                  <p class="card-text">Tech Stack: Python 95.5% Â· Shell 2.3% Â· Jupyter Notebook 2.2%</p>
-                  <a href="https://github.com/SamarjeetMalik/Transformer-based-shape-prediction-and-completion"
-                    class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-6.jpg" width="300" height="220" loading="lazy"
-                  alt="Volumetric Simulation Similarity Metrics" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Volumetric Simulation Similarity Metrics (VolSiM)</h3>
-                  <p class="card-text">
-                    CNN-based system for assessing similarity in volumetric simulations with entropy-based
-                    similarity model, correlation-based loss, and multiscale CNN architecture. Robust to rotation
-                    and scale â€” validated on dynamic turbulence scenarios.
-                  </p>
-                  <p class="card-text">Tech Stack: Python 87.7% Â· C++ 10.8% Â· Shell 1.1%</p>
-                  <a href="https://github.com/SamarjeetMalik/Using-multi-scale-CNN-in-Volumetric-Simulations"
-                    class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-7.jpg" width="300" height="220" loading="lazy"
-                  alt="3D Diffusion Model Training System" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">3D Diffusion Model Training System</h3>
-                  <p class="card-text">
-                    System for training 3D diffusion models from 2D images using the Co3Dv2 dataset; implemented
-                    preprocessing pipeline, configurable hyperparameters, and Visdom-based training visualization.
-                    Advanced sampling enables accurate 3D reconstruction and progressive animation generation.
-                  </p>
-                  <p class="card-text">Tech Stack: Python 100.0%</p>
-                  <a href="https://github.com/SamarjeetMalik/Training-a-3D-model-using-2D-images"
-                    class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-8.jpg" width="300" height="220" loading="lazy"
-                  alt="3D Animal Generation from Videos" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">3D Animal Generation from Videos</h3>
-                  <p class="card-text">
-                    System to generate 3D animal models from video sequences using CSE map extraction; implemented
-                    scene optimization framework, integrated VGGSfM and Segment-Anything for precise segmentation
-                    and feature matching, with a visualization system for rendering results.
-                  </p>
-                  <p class="card-text">Tech Stack: Python 100.0%</p>
-                  <a href="https://github.com/SamarjeetMalik/Reconstruction-of-3D-animals" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
           <li>
@@ -797,56 +656,10 @@
           </li>
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-11.jpg" width="300" height="220" loading="lazy"
-                  alt="Hybrid Solution for Reactive Flows" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Hybrid Solution for Reactive Flows</h3>
-                  <p class="card-text">
-                    Hybrid neural networkâ€“PDE solver for reactive flows combining deep learning with physics-based
-                    modeling; built a synthetic data generation system, flame evolution prediction model, and
-                    integrated PhiFlow for enhanced fluid dynamics simulations.
-                  </p>
-                  <p class="card-text">Tech Stack: Python 97.8% Â· Makefile 2.2%</p>
-                  <a href="https://github.com/SamarjeetMalik/Hybrid-solution-to-Reactive-flows" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-12.jpg" width="300" height="220" loading="lazy"
-                  alt="Weather Forecasting System" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Weather Forecasting System</h3>
-                  <p class="card-text">
-                    Data-driven weather forecasting using CNNs; built a processing pipeline for ERA5 climate data,
-                    implemented regridding for precise model training, and created an evaluation framework. Integrates
-                    multiple weather variables for enhanced multi-step predictions.
-                  </p>
-                  <p class="card-text">Tech Stack: Jupyter Notebook 100.0%</p>
-                  <a href="https://github.com/SamarjeetMalik/Data-driven-weather-Forecasting" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
           <li>
@@ -900,80 +713,11 @@
             </div>
           </li>
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-15.jpg" width="300" height="220" loading="lazy"
-                  alt="Quantum Cryptographic Encryption for P2P Robot Communication" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Quantum Cryptographic Encryption for P2P Robot Communication</h3>
-                  <p class="card-text">
-                    Secured P2P communication for DRDO robots (DAKSH, NETRA) using SHA-256, SHA-3, RSA, ECC, and
-                    Blowfish, integrating quantum-safe cryptography (CRYSTALS-Kyber, Dilithium, Falcon, SPHINCS+)
-                    for post-quantum robustness.
-                  </p>
-                  <p class="card-text">Skills: Cryptography Â· Public Key Cryptography Â· Encryption Â· Network Security</p>
-                  <a href="#" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-16.jpg" width="300" height="220" loading="lazy"
-                  alt="Predicting Chronic Kidney Disease using Machine Learning" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Predicting Chronic Kidney Disease using Machine Learning</h3>
-                  <p class="card-text">
-                    Analysed clinical parameters to identify key risk factors for chronic kidney disease;
-                    developed a TensorFlow ML model to predict disease onset from patients' medical histories â€”
-                    providing a tool for early detection and proactive healthcare intervention.
-                  </p>
-                  <p class="card-text">Skills: Python Â· TensorFlow Â· Machine Learning</p>
-                  <a href="#" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
-          <li>
-            <div class="blog-card">
-              <figure class="card-banner img-holder"
-                style="--width: 700; --height: 470;display: flex;justify-content: center;align-items: center;">
-                <img src="./assets/images/portfolio-17.jpg" width="300" height="220" loading="lazy"
-                  alt="Filters and Fractals" class="img-cover">
-              </figure>
-              <div class="card-content">
-                <div>
-                  <h3 class="h3 card-title">Filters and Fractals</h3>
-                  <p class="card-text">
-                    C project for image processing operations on PPM images â€” resizing, filtering, brightness,
-                    contrast, saturation adjustment. Implemented recursive functions to generate fractals:
-                    Mandelbrot set, Julia set, Koch curve, Barnsley fern, and Sierpinski triangle.
-                  </p>
-                  <p class="card-text">Skills: C Â· Image Processing</p>
-                  <a href="#" class="btn has-before">
-                    <span class="span">View project</span>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          
 
 
         </ul>
@@ -1790,6 +1534,10 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/programming-languages-logos@0.0.3/src/logos.min.js"></script>
+
+  <button class="back-top-btn" data-back-top-btn aria-label="back to top">
+    <ion-icon name="arrow-up-outline"></ion-icon>
+  </button>
 </body>
 
 </html>

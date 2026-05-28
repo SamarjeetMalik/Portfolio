@@ -153,3 +153,23 @@ setInterval(() => {
     sliders[i].querySelector("[data-slider-next]").click();
   }
 }, 2000);
+
+
+
+/**
+ * BACK TO TOP BUTTON
+ */
+
+const backTopBtn = document.querySelector("[data-back-top-btn]");
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY >= 100) {
+    backTopBtn.classList.add("active");
+  } else {
+    backTopBtn.classList.remove("active");
+  }
+});
+
+backTopBtn.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
