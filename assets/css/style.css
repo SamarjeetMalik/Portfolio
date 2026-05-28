@@ -1116,3 +1116,29 @@ object-fit:fill; }
 }
 
 .logo-text .accent { color: var(--accent); }
+
+/* Skip-to-content link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--accent);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-700);
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+
+/* Keyboard-accessible skill tags */
+.tag:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
