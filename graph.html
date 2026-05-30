@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samarjeet Malik — 3D Research Knowledge Graph</title>
+<script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
+<style>
+:root {
+  --bg: #06070f;
+  --panel: rgba(8,10,22,0.92);
+  --panel-border: rgba(78,121,167,0.25);
+  --accent: #4E79A7;
+  --accent2: #F28E2B;
+  --accent3: #59A14F;
+  --accent4: #E15759;
+  --accent5: #B07AA1;
+  --accent6: #76B7B2;
+  --gold: #f0c040;
+  --text: #dde2f0;
+  --text2: #8a93b2;
+  --text3: #404870;
+  --green: #5dd472;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; }
+
+/* ── GRAPH FILLS VIEWPORT ── */
+#graph-3d { position: fixed; inset: 0; z-index: 1; }
+
+/* ── TOP BAR ── */
+#topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 44px;
+  background: rgba(6,7,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--panel-border);
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 14px; z-index: 100;
+}
+#topbar-title { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+#topbar-title span { color: var(--accent); }
+#search-wrap { position: relative; }
+#search-input {
+  width: 220px; background: rgba(255,255,255,0.06);
+  border: 1px solid var(--panel-border); color: var(--text);
+  padding: 5px 10px; border-radius: 5px; font-size: 12px; outline: none;
+}
+#search-input:focus { border-color: var(--accent); background: rgba(78,121,167,0.1); }
+#search-dropdown {
+  position: absolute; top: 34px; left: 0; width: 280px;
+  background: rgba(8,10,24,0.97); border: 1px solid var(--panel-border);
+  border-radius: 0 0 8px 8px; max-height: 200px; overflow-y: auto; z-index: 200; display: none;
+  backdrop-filter: blur(12px);
+}
+.sd-item {
+  padding: 6px 12px; cursor: pointer; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; gap: 8px; align-items: center; transition: background 0.1s;
+}
+.sd-item:hover { background: rgba(78,121,167,0.2); }
+.sd-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sd-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+.sd-type { font-size: 9px; color: var(--text3); }
+.tb-sep { width: 1px; height: 22px; background: var(--panel-border); }
+.tb-btn {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--panel-border);
+  color: var(--text2); padding: 4px 10px; border-radius: 5px;
+  font-size: 11px; cursor: pointer; white-space: nowrap;
+  transition: all 0.15s; user-select: none;
+}
+.tb-btn:hover { background: rgba(78,121,167,0.2); color: var(--text); }
+.tb-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+#stats-chip {
+  margin-left: auto; font-size: 10px; color: var(--text3);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--panel-border);
+  padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+}
+
+/* ── LEFT PORTRAIT PANEL ── */
+#portrait {
+  position: fixed; left: 14px; top: 58px; bottom: 14px;
+  width: 240px; z-index: 50;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  backdrop-filter: blur(16px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--panel-border) transparent;
+}
+#portrait.collapsed { transform: translateX(-256px); }
+#portrait-toggle {
+  position: fixed; left: 14px; top: 58px;
+  width: 24px; height: 44px;
+  background: var(--panel); border: 1px solid var(--panel-border);
+  border-radius: 0 6px 6px 0; cursor: pointer; z-index: 51;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text2);
+  backdrop-filter: blur(16px);
+  transition: left 0.3s ease;
+  display: none;
+}
+
+.p-header {
+  background: linear-gradient(160deg, rgba(12,18,48,0.9) 0%, rgba(18,28,58,0.9) 100%);
+  padding: 16px 14px 12px; border-bottom: 1px solid var(--panel-border);
+}
+.p-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent5));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;
+  box-shadow: 0 0 20px rgba(78,121,167,0.4);
+}
+.p-name { font-size: 14px; font-weight: 700; color: #fff; }
+.p-title { font-size: 10px; color: var(--accent6); margin-top: 2px; line-height: 1.4; }
+.p-links { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+.p-link {
+  font-size: 10px; padding: 2px 7px; border-radius: 3px;
+  border: 1px solid var(--panel-border); color: var(--text2);
+  text-decoration: none; background: rgba(255,255,255,0.04);
+  transition: all 0.15s;
+}
+.p-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.p-section { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.p-section-title {
+  font-size: 9px; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 7px;
+}
+
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.metric-box {
+  background: rgba(255,255,255,0.04); border-radius: 5px; padding: 6px 7px;
+  border: 1px solid var(--panel-border);
+}
+.metric-val { font-size: 14px; font-weight: 700; color: var(--gold); }
+.metric-lbl { font-size: 9px; color: var(--text3); margin-top: 1px; line-height: 1.3; }
+
+.thread-card {
+  background: rgba(255,255,255,0.03); border-radius: 5px; padding: 7px 9px;
+  border: 1px solid var(--panel-border); margin-bottom: 5px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.thread-card:hover, .thread-card.active { border-color: var(--accent); background: rgba(78,121,167,0.1); }
+.thread-head { display: flex; justify-content: space-between; align-items: baseline; }
+.thread-title { font-size: 10px; font-weight: 600; color: var(--text); }
+.thread-metric { font-size: 10px; color: var(--gold); font-weight: 700; }
+.thread-desc { font-size: 9px; color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+.tl-item { display: flex; gap: 7px; padding: 4px 0; }
+.tl-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+  position: relative; z-index: 1;
+}
+.tl-date { font-size: 9px; color: var(--text3); }
+.tl-label { font-size: 10px; color: var(--text); line-height: 1.3; }
+.tl-org { font-size: 9px; color: var(--accent6); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.tag {
+  font-size: 9px; padding: 2px 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--panel-border); color: var(--text2);
+}
+.tag.blue { border-color: rgba(78,121,167,0.4); color: var(--accent); }
+.tag.green { border-color: rgba(89,161,79,0.4); color: var(--accent3); }
+.tag.orange { border-color: rgba(242,142,43,0.4); color: var(--accent2); }
+
+.pub-item { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.pub-item:last-child { border: none; }
+.pub-title { font-size: 10px; color: var(--text); line-height: 1.3; }
+.pub-venue { font-size: 9px; color: var(--accent2); margin-top: 1px; }
+.pub-badge {
+  display: inline-block; font-size: 8px; padding: 1px 5px; border-radius: 2px; margin-left: 3px;
+}
+.pub-badge.accepted { background: rgba(93,212,114,0.15); color: var(--green); }
+.pub-badge.review   { background: rgba(242,142,43,0.15); color: var(--accent2); }
+.pub-badge.prep     { background: rgba(78,121,167,0.15); color: var(--accent); }
+
+.award-item { display: flex; gap: 7px; padding: 4px 0; align-items: flex-start; }
+.award-icon { font-size: 12px; }
+.award-text { font-size: 10px; color: var(--text); line-height: 1.3; }
+.award-cat  { font-size: 9px; color: var(--text3); }
+
+/* ── COMMUNITY LEGEND ── */
+#comm-legend {
+  position: fixed; right: 14px; top: 58px;
+  width: 210px; z-index: 50; max-height: calc(50vh);
+  background: var(--panel); border: 1px solid var(--panel-border);
+  border-radius: 10px; backdrop-filter: blur(16px);
+  overflow-y: auto; padding: 10px;
+  scrollbar-width: thin; scrollbar-color: var(--panel-border) transparent;
+}
+#comm-legend h3 { font-size: 9px; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 7px; }
+.cl-item {
+  display: flex; align-items: center; gap: 6px; padding: 3px 4px; border-radius: 4px;
+  cursor: pointer; font-size: 10px; transition: background 0.1s; user-select: none;
+}
+.cl-item:hover { background: rgba(255,255,255,0.06); }
+.cl-item.dimmed { opacity: 0.25; }
+.cl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cl-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text2); }
+.cl-cnt { font-size: 9px; color: var(--text3); }
+
+/* ── NODE INSPECTOR (floating, bottom-right) ── */
+#inspector {
+  position: fixed; right: 14px; bottom: 14px;
+  width: 280px; max-height: 380px;
+  background: var(--panel); border: 1px solid var(--panel-border);
+  border-radius: 10px; backdrop-filter: blur(16px);
+  z-index: 50; overflow: hidden;
+  transform: translateY(calc(100% + 20px));
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex; flex-direction: column;
+}
+#inspector.visible { transform: translateY(0); }
+#insp-header {
+  padding: 10px 12px 8px; border-bottom: 1px solid var(--panel-border);
+  background: rgba(255,255,255,0.03);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+#insp-close {
+  margin-left: auto; cursor: pointer; font-size: 14px; color: var(--text3);
+  line-height: 1; padding: 0 2px; flex-shrink: 0;
+}
+#insp-close:hover { color: var(--text); }
+#insp-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.insp-hd { flex: 1; min-width: 0; }
+#insp-name { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
+#insp-type { font-size: 9px; color: var(--text3); margin-top: 2px; }
+#insp-body { overflow-y: auto; padding: 10px 12px; flex: 1;
+  scrollbar-width: thin; scrollbar-color: var(--panel-border) transparent; }
+.ib-row { display: flex; gap: 8px; margin-bottom: 5px; font-size: 10px; }
+.ib-key { color: var(--text3); flex-shrink: 0; width: 60px; }
+.ib-val { color: var(--text); flex: 1; word-break: break-word; }
+.ib-desc { font-size: 10px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+.ib-metric { font-size: 11px; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.ib-comm { padding: 5px 8px; border-radius: 4px; font-size: 10px; margin-bottom: 8px; border: 1px solid var(--panel-border); }
+.ib-section-title { font-size: 9px; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+.nb-entry {
+  display: flex; align-items: center; gap: 6px; padding: 3px 5px; border-radius: 3px;
+  cursor: pointer; font-size: 10px; transition: background 0.1s;
+}
+.nb-entry:hover { background: rgba(255,255,255,0.06); }
+.nb-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.nb-lbl { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+.nb-rel { font-size: 9px; color: var(--text3); }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- 3D GRAPH FILLS VIEWPORT -->
+<div id="graph-3d"></div>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div id="topbar-title">Samarjeet Malik — <span>3D Research Graph</span></div>
+  <div class="tb-sep"></div>
+  <div id="search-wrap">
+    <input id="search-input" type="text" placeholder="Search nodes…" autocomplete="off">
+    <div id="search-dropdown"></div>
+  </div>
+  <button class="tb-btn active" id="btn-all"     onclick="filterType(null,this)">All</button>
+  <button class="tb-btn"        id="btn-person"  onclick="filterType('person',this)">People</button>
+  <button class="tb-btn"        id="btn-method"  onclick="filterType('method',this)">Methods</button>
+  <button class="tb-btn"        id="btn-concept" onclick="filterType('concept',this)">Concepts</button>
+  <button class="tb-btn"        id="btn-code"    onclick="filterType('code',this)">Code</button>
+  <button class="tb-btn"        id="btn-result"  onclick="filterType('result',this)">Results</button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" onclick="Graph.zoomToFit(800,120)">Fit All</button>
+  <button class="tb-btn active" id="btn-labels" onclick="toggleLabels()">Labels</button>
+  <div id="stats-chip">Loading…</div>
+</div>
+
+<!-- LEFT: PORTRAIT -->
+<div id="portrait">
+  <div class="p-header">
+    <div class="p-avatar">SM</div>
+    <div class="p-name">Samarjeet Malik</div>
+    <div class="p-title">Predoctoral Researcher · Physics-Informed ML &amp; Astroparticle Physics</div>
+    <div class="p-links">
+      <a class="p-link" href="https://samarjeetmalik.github.io/Portfolio/#home" target="_blank">Portfolio</a>
+      <a class="p-link" href="https://github.com/SamarjeetMalik" target="_blank">GitHub</a>
+      <a class="p-link" href="https://linkedin.com/in/samarjeetmalik" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Key Metrics</div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="metric-val">σ=0.106</div><div class="metric-lbl">Energy resolution</div></div>
+      <div class="metric-box"><div class="metric-val">37%</div><div class="metric-lbl">Improvement over NKG</div></div>
+      <div class="metric-box"><div class="metric-val">R²=0.72</div><div class="metric-lbl">PINN (34k MC events)</div></div>
+      <div class="metric-box"><div class="metric-val">δ=0.077</div><div class="metric-lbl">Multiplicity exponent</div></div>
+      <div class="metric-box"><div class="metric-val">AUC=1.0</div><div class="metric-lbl">Composition (clean MC)</div></div>
+      <div class="metric-box"><div class="metric-val">739</div><div class="metric-lbl">Graph nodes</div></div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Research Threads</div>
+    <div class="thread-card" onclick="focusCommunity(3)">
+      <div class="thread-head"><span class="thread-title">T1 · PINN Energy Recon</span><span class="thread-metric">RMSE 0.135</span></div>
+      <div class="thread-desc">Soft monotonicity + slope regularization in loss. Soft &gt; Strict &gt; None.</div>
+    </div>
+    <div class="thread-card" onclick="focusCommunity(16)">
+      <div class="thread-head"><span class="thread-title">T2 · Uncertainty QA</span><span class="thread-metric">OOD ✓</span></div>
+      <div class="thread-desc">Dual-head aleatoric UQ. Calibrated σ. Intrinsic OOD detection.</div>
+    </div>
+    <div class="thread-card" onclick="focusCommunity(16)">
+      <div class="thread-head"><span class="thread-title">T3 · Symbolic Regression</span><span class="thread-metric">R²=0.864</span></div>
+      <div class="thread-desc">PySR closed-form estimators. Pareto frontier complexity↔performance.</div>
+    </div>
+    <div class="thread-card" onclick="focusCommunity(18)">
+      <div class="thread-head"><span class="thread-title">T4 · Muon Surface Geometry</span><span class="thread-metric">K&lt;0</span></div>
+      <div class="thread-desc">Gaussian curvature → δ=0.077±0.014 (hadronic multiplicity).</div>
+    </div>
+    <div class="thread-card" onclick="focusCommunity(11)">
+      <div class="thread-head"><span class="thread-title">T5 · Mass Composition</span><span class="thread-metric">AUC=1.0</span></div>
+      <div class="thread-desc">Light vs heavy binary classifier. Shower age dominant (0.677).</div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Experience</div>
+    <div class="tl-item"><div class="tl-dot" style="background:#4E79A7"></div><div><div class="tl-date">Mar 2026–Now</div><div class="tl-label">Research Intern · CSST, ORF</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#F28E2B"></div><div><div class="tl-date">Jan–Feb 2026</div><div class="tl-label">ML Intern · TIFR–GRAPES-3</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#E15759"></div><div><div class="tl-date">Dec 2024–Feb 2026</div><div class="tl-label">Predoc Fellow · IIT Jodhpur + IOP</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#B07AA1"></div><div><div class="tl-date">Jan–Mar 2025</div><div class="tl-label">Policy Analyst · NITI Aayog</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#76B7B2"></div><div><div class="tl-date">Jul–Nov 2024</div><div class="tl-label">Research Intern · BARC</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#EDC948"></div><div><div class="tl-date">Dec 2023–Apr 2024</div><div class="tl-label">AI-ML Intern · DRDO</div></div></div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Skills</div>
+    <div class="tags">
+      <span class="tag blue">PyTorch</span><span class="tag blue">JAX</span><span class="tag blue">CUDA</span>
+      <span class="tag green">CORSIKA</span><span class="tag green">GEANT4</span><span class="tag green">AstroPy</span>
+      <span class="tag orange">Python</span><span class="tag orange">C++</span><span class="tag orange">HPC/SLURM</span>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Publications</div>
+    <div class="pub-item">
+      <div class="pub-title">JetMAE: Colour Factors Explain 96% of Neural Tagger<span class="pub-badge accepted">Accepted</span></div>
+      <div class="pub-venue">Stanford PAI26, 2026</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Geometric Origin of Curvature in Muon Scaling<span class="pub-badge prep">In Prep</span></div>
+      <div class="pub-venue">Target: NeurIPS 2026</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">PINN for Laser-Induced Graphene Cancer Sensors<span class="pub-badge review">Under Review</span></div>
+      <div class="pub-venue">Computational Physics, Elsevier</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Real Estate ML · IEEE ICNGTSE 2025</div>
+      <div class="pub-venue">IEEE Conference</div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Awards</div>
+    <div class="award-item"><div class="award-icon">🥇</div><div><div class="award-text">IMO 2× Gold — Int'l Rank 97</div><div class="award-cat">International Mathematics Olympiad</div></div></div>
+    <div class="award-item"><div class="award-icon">🥇</div><div><div class="award-text">NSO 2× Gold — Int'l Rank 248</div><div class="award-cat">National Science Olympiad</div></div></div>
+    <div class="award-item"><div class="award-icon">🏃</div><div><div class="award-text">2× National Gold · 110m Hurdles</div><div class="award-cat">North Zone Captain</div></div></div>
+    <div class="award-item"><div class="award-icon">🚀</div><div><div class="award-text">SIH 2023 ISRO Finalist</div><div class="award-cat">Smart India Hackathon</div></div></div>
+    <div class="award-item"><div class="award-icon">🎙️</div><div><div class="award-text">9/11 MUN · 8 Debate Wins</div><div class="award-cat">NLU Delhi, DU, NLU Patna, NIT Rourkela</div></div></div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-section-title">Supervisors</div>
+    <div style="font-size:10px;color:var(--text);margin-bottom:2px">Prof. Aruna Kumar Nayak</div>
+    <div style="font-size:9px;color:var(--text3);margin-bottom:7px">IOP Bhubaneswar · CERN Associate</div>
+    <div style="font-size:10px;color:var(--text);margin-bottom:2px">Prof. Gaurav Harit</div>
+    <div style="font-size:9px;color:var(--text3);margin-bottom:7px">Assoc. Professor CSE, IIT Jodhpur</div>
+    <div style="font-size:10px;color:var(--text);margin-bottom:2px">Dr. Martin Mascarenhas</div>
+    <div style="font-size:9px;color:var(--text3)">Outstanding Scientist, BARC Mumbai</div>
+  </div>
+</div>
+
+<!-- COMMUNITY LEGEND -->
+<div id="comm-legend">
+  <h3>Communities</h3>
+  <div id="comm-list"></div>
+</div>
+
+<!-- NODE INSPECTOR -->
+<div id="inspector">
+  <div id="insp-header">
+    <div id="insp-dot"></div>
+    <div class="insp-hd">
+      <div id="insp-name">Node</div>
+      <div id="insp-type">type</div>
+    </div>
+    <div id="insp-close" onclick="closeInspector()">✕</div>
+  </div>
+  <div id="insp-body"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// COMMUNITY DATA
+// ─────────────────────────────────────────────
+const COMMUNITIES = [
+  { id:0,  name:"Analysis Code",         color:"#4E79A7" },
+  { id:1,  name:"Simulation Config",     color:"#F28E2B" },
+  { id:2,  name:"CR Physics Concepts",   color:"#59A14F" },
+  { id:3,  name:"Energy Reconstruction", color:"#E15759" },
+  { id:4,  name:"Lab & Equipment",       color:"#B07AA1" },
+  { id:5,  name:"ML vs NKG Results",     color:"#76B7B2" },
+  { id:6,  name:"EAS Observables",       color:"#EDC948" },
+  { id:7,  name:"Stats Code",            color:"#FF9DA7" },
+  { id:8,  name:"Research Papers",       color:"#9C755F" },
+  { id:9,  name:"PI-ML Concepts",        color:"#BAB0AC" },
+  { id:10, name:"GRAPES-3 Core",         color:"#499894" },
+  { id:11, name:"Composition Results",   color:"#86BCB6" },
+  { id:12, name:"Shower Age Studies",    color:"#E15759" },
+  { id:13, name:"PINN Code",             color:"#D37295" },
+  { id:14, name:"Academic Background",   color:"#FABFD2" },
+  { id:15, name:"Curvature Plots",       color:"#A0CBE8" },
+  { id:16, name:"UQ & OOD Analysis",     color:"#FFBE7D" },
+  { id:17, name:"NKG Residuals",         color:"#8CD17D" },
+  { id:18, name:"Principal Curvature",   color:"#B6992D" },
+  { id:19, name:"Gaussian Curv & Train", color:"#F1CE63" },
+  { id:20, name:"OOD Metrics",           color:"#D4A6C8" },
+  { id:21, name:"Energy Distribution",   color:"#86BCB6" },
+  { id:22, name:"Model Comparisons",     color:"#D7B5A6" },
+  { id:23, name:"Final Results Tables",  color:"#E8A6A1" },
+  { id:24, name:"ML Diagnostics",        color:"#9ABCE4" },
+  { id:25, name:"Performance Metrics",   color:"#C0EAD5" },
+  { id:26, name:"PINN Training Diag",    color:"#FFD7A1" },
+  { id:27, name:"Training Rationale",    color:"#C3A6D8" },
+  { id:28, name:"Gamma-Ray Anisotropy",  color:"#A9D9A4" },
+  { id:29, name:"Energy Res Compar",     color:"#FDCA97" },
+  { id:30, name:"CR Spectrum",           color:"#F5A44A" },
+  { id:31, name:"Physics Gradients",     color:"#74C4C4" },
+  { id:32, name:"Self-Organized Crit",   color:"#C9A8E0" },
+  { id:33, name:"Eikonal SDF Loss",      color:"#F4B7C0" },
+  { id:34, name:"PINN Visualization",    color:"#ADE8AD" },
+  { id:35, name:"Seasonal Spectrum",     color:"#FFD3A1" },
+  { id:36, name:"UQ Calibration",        color:"#A1D4FF" },
+  { id:37, name:"Forbush Decrease",      color:"#FFC4C4" },
+  { id:38, name:"CR Anisotropy",         color:"#C4FFC4" },
+  { id:39, name:"Core Position Res",     color:"#C4D4FF" },
+  { id:40, name:"Core Chamber Diag",     color:"#FFD4C4" },
+  { id:41, name:"Composition AUC",       color:"#D4C4FF" },
+  { id:42, name:"Shower Age Cuts",       color:"#C4FFF4" },
+  { id:43, name:"Varsi Publications",    color:"#FFF4C4" },
+  { id:44, name:"GRAND GNN",            color:"#F4C4FF" },
+  { id:45, name:"Sidereal Anisotropy",   color:"#C4C4FF" },
+  { id:46, name:"Scintillator Array",    color:"#FFC4F4" },
+  { id:47, name:"EAS Features",         color:"#C4F4FF" },
+  { id:48, name:"Chi-Sq Minimization",   color:"#F4FFC4" },
+  { id:49, name:"Cruijff Function",      color:"#FFC4D4" },
+  { id:50, name:"Zenith Res A",          color:"#C4FFD4" },
+  { id:51, name:"Zenith Res B",          color:"#D4C4FF" },
+  { id:52, name:"Core Res Study",        color:"#FFD4F4" },
+  { id:53, name:"Theta Distribution",    color:"#D4FFD4" },
+  { id:54, name:"R Core Distribution",   color:"#FFE4C4" },
+];
+const commMap = {};
+COMMUNITIES.forEach(c => commMap[c.id] = c);
+
+// ─────────────────────────────────────────────
+// GOD NODES (override with richer data)
+// ─────────────────────────────────────────────
+const GOD_NODES = {
+  "person_samarjeet_malik": {
+    label: "Samarjeet Malik", group: "person", community: 14,
+    desc: "Central researcher. Predoctoral fellow (IIT Jodhpur + IOP). GRAPES-3 PINN developer. 5 research threads: PINN, UQ, symbolic regression, muon surface geometry, composition.",
+    metrics: "PINN RMSE=0.1351 · σ=0.106 · R²=0.7205 · δ=0.077",
+  },
+  "person_fahim_varsi": {
+    label: "Fahim Varsi", group: "person", community: 43,
+    desc: "PhD at KIT. PRL: proton spectral hardening 166 TeV. GNN energy reconstruction. XGBoost muon-hadron separation. Most connected node (25 edges).",
+  },
+  "person_sambit_sarkar": {
+    label: "Sambit Sarkar", group: "person", community: 1,
+    desc: "TIFR. Scaling Dynamic Reduction Network (SDRN). GRAPES-3 ML Team. ICRC 2025.",
+  },
+};
+
+// ─────────────────────────────────────────────
+// NODE GROUP → COLOR & SIZE BOOST
+// ─────────────────────────────────────────────
+const GROUP_COLOR = {
+  person:      "#4E79A7",
+  method:      "#59A14F",
+  concept:     "#F28E2B",
+  experiment:  "#B07AA1",
+  result:      "#76B7B2",
+  paper:       "#E15759",
+  code:        "#A0CBE8",
+  institution: "#D4A6C8",
+  image:       "#3a3a5e",
+  rationale:   "#2a2a4a",
+  default:     "#4E79A7",
+};
+
+function inferGroup(n) {
+  const id = (n.id || "").toLowerCase();
+  const ft = (n.file_type || "").toLowerCase();
+  if (ft === "code") return "code";
+  if (ft === "rationale") return "rationale";
+  if (ft === "image") return "image";
+  if (id.startsWith("person_")) return "person";
+  if (id.startsWith("experiment_") || id.startsWith("detector_")) return "experiment";
+  if (id.startsWith("method_")) return "method";
+  if (id.startsWith("concept_")) return "concept";
+  if (id.startsWith("result_") || id.startsWith("pub_") || id.startsWith("paper_")) return "paper";
+  if (id.startsWith("inst_")) return "institution";
+  return "default";
+}
+
+
+// ─────────────────────────────────────────────
+// APP STATE
+// ─────────────────────────────────────────────
+window.Graph = null;
+window.rawData = null;
+let activeFilter = null;
+let activeCommunity = null;
+let labelsVisible = true;
+let degreeMap = {};
+
+// ─────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────
+async function init() {
+  const json = await fetch("graph.json").then(r => r.json());
+
+  // Build degree map
+  const links = json.links || json.edges || [];
+  links.forEach(l => {
+    degreeMap[l.source] = (degreeMap[l.source] || 0) + 1;
+    degreeMap[l.target] = (degreeMap[l.target] || 0) + 1;
+  });
+
+  // Enrich nodes
+  const nodes = (json.nodes || []).map(n => {
+    const god = GOD_NODES[n.id];
+    const group = god ? god.group : inferGroup(n);
+    const comm = n.community != null ? n.community : -1;
+    const commData = commMap[comm] || { color: "#4E79A7", name: "Unknown" };
+    const deg = degreeMap[n.id] || 0;
+
+    // base color: use community color, tinted by group for variety
+    const baseColor = commData.color;
+
+    return {
+      id: n.id,
+      name: god ? god.label : (n.label || n.id),
+      group,
+      community: comm,
+      commColor: commData.color,
+      commName: commData.name,
+      description: god ? god.desc : "",
+      metrics: god ? god.metrics : "",
+      source: n.source_file || "",
+      deg,
+      // vis-network leftover, ignore
+    };
+  });
+
+  // Enrich links
+  const edges = links.map((l, i) => ({
+    source: l.source || l._src,
+    target: l.target || l._tgt,
+    relation: l.relation || "",
+    confidence: l.confidence_score || (l.confidence === "EXTRACTED" ? 1.0 : 0.77),
+    isInferred: l.confidence === "INFERRED",
+  }));
+
+  window.rawData = { nodes, edges };
+
+  buildGraph(nodes, edges);
+  buildLegend();
+  buildSearchIndex(nodes);
+  document.getElementById('stats-chip').textContent =
+    `${nodes.length} nodes · ${edges.length} edges · 55 communities`;
+}
+
+// ─────────────────────────────────────────────
+// BUILD 3D GRAPH
+// ─────────────────────────────────────────────
+// TOOLTIP BUILDER — rich HTML, no overlap (shown on hover only)
+// ─────────────────────────────────────────────
+function buildTooltip(n) {
+  let h = `<div style="background:rgba(6,7,15,0.93);border:1px solid ${n.commColor || '#4E79A7'}55;border-radius:7px;padding:8px 11px;font-family:Segoe UI,sans-serif;max-width:240px;box-shadow:0 4px 20px rgba(0,0,0,0.6)">`;
+  h += `<div style="font-size:13px;font-weight:700;color:#dde2f0;margin-bottom:4px">${n.name}</div>`;
+  h += `<div style="font-size:10px;color:#556080;margin-bottom:2px">`;
+  h += `<span style="color:${n.commColor || '#4E79A7'}">${n.commName || ''}</span>`;
+  h += ` &nbsp;·&nbsp; <span style="color:#f0c040;font-weight:600">${n.deg} connections</span>`;
+  h += `</div>`;
+  if (n.description) {
+    const s = n.description.length > 120 ? n.description.slice(0,120)+'…' : n.description;
+    h += `<div style="font-size:10px;color:#9aa3c2;margin-top:5px;line-height:1.5">${s}</div>`;
+  }
+  if (n.metrics) h += `<div style="font-size:10px;color:#f0c040;margin-top:5px;font-weight:600">${n.metrics}</div>`;
+  h += '</div>';
+  return h;
+}
+
+// ─────────────────────────────────────────────
+function buildGraph(nodes, edges) {
+  const container = document.getElementById('graph-3d');
+
+  window.Graph = ForceGraph3D({ controlType: 'orbit' })(container)
+    .width(window.innerWidth)
+    .height(window.innerHeight)
+    .backgroundColor('#06070f')
+    .graphData({ nodes, links: edges })
+
+    // Node appearance
+    .nodeColor(n => n.commColor || "#4E79A7")
+    .nodeVal(n => {
+      const d = n.deg || 0;
+      if (d >= 20) return 18;
+      if (d >= 10) return 10;
+      if (d >= 5)  return 5;
+      return 2;
+    })
+    .nodeOpacity(0.92)
+    .nodeResolution(16)
+
+
+    // Hover tooltip — rich HTML, shown for ALL nodes, zero overlap
+    .nodeLabel(buildTooltip)
+
+    // Edge appearance
+    .linkColor(l => l.isInferred ? 'rgba(78,121,167,0.2)' : 'rgba(89,161,79,0.3)')
+    .linkWidth(l => l.isInferred ? 0 : 0.5)
+    .linkOpacity(0.6)
+    .linkDirectionalParticles(l => (l.confidence >= 1.0 && !l.isInferred) ? 1 : 0)
+    .linkDirectionalParticleWidth(1.2)
+    .linkDirectionalParticleColor(() => 'rgba(240,192,64,0.8)')
+    .linkDirectionalParticleSpeed(0.006)
+
+    // Click → inspector + fly to node
+    .onNodeClick(node => {
+      showInspector(node);
+      const dist = 120;
+      const distRatio = 1 + dist / Math.hypot(node.x||1, node.y||1, node.z||1);
+      Graph.cameraPosition(
+        { x: (node.x||0) * distRatio, y: (node.y||0) * distRatio, z: (node.z||0) * distRatio },
+        node,
+        800
+      );
+    })
+
+    // Force settings
+    .d3AlphaDecay(0.02)
+    .d3VelocityDecay(0.3);
+
+  // Tune the built-in charge force — spread nodes without exploding
+  const cf = Graph.d3Force('charge');
+  if (cf) cf.strength(n => -80 - (n.deg || 0) * 3).distanceMax(400);
+  const lf = Graph.d3Force('link');
+  if (lf) lf.distance(80).strength(0.4);
+
+  // Resize handling
+  window.addEventListener('resize', () => {
+    Graph.width(window.innerWidth).height(window.innerHeight);
+  });
+
+  // Gentle auto-rotate
+  let angle = 0;
+  let rotating = true;
+  Graph.onEngineStop(() => {
+    rotating && (function spin() {
+      if (!rotating) return;
+      angle += 0.003;
+      Graph.cameraPosition({
+        x: Math.sin(angle) * 500,
+        z: Math.cos(angle) * 500
+      });
+      requestAnimationFrame(spin);
+    })();
+  });
+  // Stop rotation on user interaction
+  document.getElementById('graph-3d').addEventListener('mousedown', () => { rotating = false; });
+  document.getElementById('graph-3d').addEventListener('touchstart', () => { rotating = false; });
+
+  // Zoom to fit after physics settles
+  setTimeout(() => Graph.zoomToFit(1200, 180), 6000);
+}
+
+// ─────────────────────────────────────────────
+// INSPECTOR
+// ─────────────────────────────────────────────
+function showInspector(node) {
+  document.getElementById('insp-dot').style.background = node.commColor || '#4E79A7';
+  document.getElementById('insp-name').textContent = node.name;
+  document.getElementById('insp-type').textContent = `${node.group} · community ${node.commName}`;
+
+  const allEdges = rawData.edges;
+  const neighbors = allEdges
+    .filter(e => e.source === node.id || e.target === node.id || e.source.id === node.id || e.target.id === node.id)
+    .map(e => {
+      const otherId = (e.source === node.id || e.source.id === node.id) ? (e.target.id || e.target) : (e.source.id || e.source);
+      const otherNode = rawData.nodes.find(n => n.id === otherId);
+      return { node: otherNode, rel: e.relation };
+    })
+    .filter(x => x.node);
+
+  let html = '';
+
+  html += `<div class="ib-row"><span class="ib-key">Degree</span><span class="ib-val">${node.deg} connections</span></div>`;
+  html += `<div class="ib-row"><span class="ib-key">Source</span><span class="ib-val" style="font-size:9px;word-break:break-all">${(node.source || '—').replace('C:\\Users\\KIIT\\Desktop\\GRAPES - 3\\','')}</span></div>`;
+
+  if (node.description) {
+    html += `<div class="ib-desc" style="margin-top:6px">${node.description}</div>`;
+  }
+  if (node.metrics) {
+    html += `<div class="ib-metric">${node.metrics}</div>`;
+  }
+
+  const c = commMap[node.community];
+  if (c) {
+    html += `<div class="ib-comm" style="border-color:${c.color};background:${c.color}18">
+      <span style="color:${c.color};font-weight:600">${c.name}</span>
+    </div>`;
+  }
+
+  if (neighbors.length > 0) {
+    html += `<div class="ib-section-title">Connections (${neighbors.length})</div>`;
+    neighbors.slice(0, 40).forEach(({ node: nb, rel }) => {
+      if (!nb) return;
+      const col = nb.commColor || '#4E79A7';
+      html += `<div class="nb-entry" onclick="flyToNode('${nb.id}')">
+        <div class="nb-dot" style="background:${col}"></div>
+        <span class="nb-lbl">${nb.name}</span>
+        <span class="nb-rel">${rel}</span>
+      </div>`;
+    });
+  }
+
+  document.getElementById('insp-body').innerHTML = html;
+  document.getElementById('inspector').classList.add('visible');
+}
+
+function closeInspector() {
+  document.getElementById('inspector').classList.remove('visible');
+}
+
+function flyToNode(nodeId) {
+  const node = rawData.nodes.find(n => n.id === nodeId);
+  if (!node) return;
+  showInspector(node);
+  const dist = 120;
+  const distRatio = 1 + dist / Math.hypot(node.x||1, node.y||1, node.z||1);
+  Graph.cameraPosition(
+    { x: (node.x||0) * distRatio, y: (node.y||0) * distRatio, z: (node.z||0) * distRatio },
+    node, 800
+  );
+}
+
+// ─────────────────────────────────────────────
+// FILTER BY TYPE
+// ─────────────────────────────────────────────
+function filterType(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.tb-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  if (!type) {
+    Graph.nodeVisibility(true).linkVisibility(true);
+    return;
+  }
+  Graph.nodeVisibility(n => n.group === type);
+  Graph.linkVisibility(l => {
+    const s = l.source.id || l.source;
+    const t = l.target.id || l.target;
+    const sn = rawData.nodes.find(n => n.id === s);
+    const tn = rawData.nodes.find(n => n.id === t);
+    return sn && tn && sn.group === type && tn.group === type;
+  });
+}
+
+// ─────────────────────────────────────────────
+// FOCUS ON COMMUNITY
+// ─────────────────────────────────────────────
+function focusCommunity(commId) {
+  if (activeCommunity === commId) {
+    activeCommunity = null;
+    Graph.nodeVisibility(true).linkVisibility(true);
+    document.querySelectorAll('.cl-item').forEach(el => el.classList.remove('dimmed'));
+    document.querySelectorAll('.thread-card').forEach(el => el.classList.remove('active'));
+    return;
+  }
+  activeCommunity = commId;
+  Graph.nodeVisibility(n => n.community === commId);
+  Graph.linkVisibility(l => {
+    const s = l.source.id || l.source;
+    const t = l.target.id || l.target;
+    const sn = rawData.nodes.find(n => n.id === s);
+    const tn = rawData.nodes.find(n => n.id === t);
+    return sn && tn && sn.community === commId && tn.community === commId;
+  });
+  document.querySelectorAll('.cl-item').forEach(el => {
+    const id = parseInt(el.dataset.id);
+    el.classList.toggle('dimmed', id !== commId);
+  });
+  setTimeout(() => Graph.zoomToFit(600, 60), 200);
+}
+
+// ─────────────────────────────────────────────
+// TOGGLE LABELS
+// ─────────────────────────────────────────────
+function toggleLabels() {
+  labelsVisible = !labelsVisible;
+  const btn = document.getElementById('btn-labels');
+  if (btn) btn.classList.toggle('active', labelsVisible);
+  // Toggle tooltip visibility: empty string = no tooltip, rich HTML = tooltip shown
+  Graph.nodeLabel(labelsVisible ? buildTooltip : () => '');
+}
+
+// ─────────────────────────────────────────────
+// COMMUNITY LEGEND
+// ─────────────────────────────────────────────
+function buildLegend() {
+  const list = document.getElementById('comm-list');
+  list.innerHTML = COMMUNITIES.map(c =>
+    `<div class="cl-item" data-id="${c.id}" onclick="focusCommunity(${c.id})">
+      <div class="cl-dot" style="background:${c.color}"></div>
+      <span class="cl-name">${c.name}</span>
+    </div>`
+  ).join('');
+}
+
+// ─────────────────────────────────────────────
+// SEARCH
+// ─────────────────────────────────────────────
+let searchNodes = [];
+function buildSearchIndex(nodes) { searchNodes = nodes; }
+
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const dd = document.getElementById('search-dropdown');
+  if (!q) { dd.style.display = 'none'; return; }
+  const hits = searchNodes.filter(n => n.name.toLowerCase().includes(q)).slice(0, 12);
+  if (!hits.length) { dd.style.display = 'none'; return; }
+  dd.innerHTML = hits.map(n =>
+    `<div class="sd-item" onclick="flyToNode('${n.id}');document.getElementById('search-input').value='';document.getElementById('search-dropdown').style.display='none'">
+      <div class="sd-dot" style="background:${n.commColor}"></div>
+      <span class="sd-label">${n.name}</span>
+      <span class="sd-type">${n.group}</span>
+    </div>`
+  ).join('');
+  dd.style.display = 'block';
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('#search-wrap')) document.getElementById('search-dropdown').style.display = 'none';
+});
+
+// ─────────────────────────────────────────────
+// EMBED MODE — hide portrait when ?embed=1 (used by portfolio iframe)
+// ─────────────────────────────────────────────
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.getElementById('portrait').style.display = 'none';
+}
+
+// ─────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>

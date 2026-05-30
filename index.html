@@ -195,20 +195,20 @@
       <!-- KNOWLEDGE GRAPH (home page, below hero) -->
       <section class="section graph-section" data-page="home">
         <div class="container">
-          <p class="section-subtitle">Career Network</p>
-          <h2 class="h2 section-title">Knowledge Graph</h2>
+          <p class="section-subtitle">721 nodes · 1041 edges · 55 communities</p>
+          <h2 class="h2 section-title">3D Research Knowledge Graph</h2>
           <div id="kg-wrap">
-            <svg id="kg-svg"></svg>
-            <div class="kg-tooltip" id="kg-tip"></div>
-            <div class="kg-legend">
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#f0c040"></div>Core</div>
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#2cb5b8"></div>Research</div>
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ff7043"></div>Policy</div>
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ab47bc"></div>Skills</div>
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#42a5f5"></div>Outputs</div>
-              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ec407a"></div>Awards</div>
-            </div>
+            <iframe
+              src="./graph.html?embed=1"
+              title="3D Research Knowledge Graph — Samarjeet Malik"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+            <a href="./graph.html" target="_blank" class="kg-fullscreen-btn" aria-label="Open full screen">
+              <ion-icon name="expand-outline"></ion-icon> Full Screen
+            </a>
           </div>
+          <p class="kg-hint">Drag to rotate · Scroll to zoom · Click any node to inspect · Hover for details</p>
         </div>
       </section>
 
@@ -1843,8 +1843,6 @@
   <!--
     - custom js link
   -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="./assets/js/knowledge-graph.js"></script>
   <script src="./assets/js/script.js"></script>
 
   <!--
