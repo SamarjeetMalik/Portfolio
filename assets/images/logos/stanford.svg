@@ -1,6 +1,7 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#8C1515" fill-opacity="0.15"/>
-  <rect width="48" height="48" rx="8" fill="none" stroke="#8C1515" stroke-width="1.5" stroke-opacity="0.5"/>
-  <text x="24" y="30" font-family="'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700"
-        fill="#8C1515" text-anchor="middle" letter-spacing="0.5">STAN</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <rect width="120" height="60" rx="6" fill="#8C1515"/>
+  <text x="60" y="43" font-family="'Times New Roman',serif" font-size="36" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">S</text>
+  <text x="60" y="54" font-family="'Times New Roman',serif" font-size="9"
+        fill="#FFD700" text-anchor="middle" letter-spacing="3">STANFORD</text>
 </svg>

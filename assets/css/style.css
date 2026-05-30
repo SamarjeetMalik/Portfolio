@@ -1457,6 +1457,75 @@ footer[data-page].page-active { display: flex; }
 
 
 /*-----------------------------------*\
+  #AFFILIATIONS LOGO STRIP
+\*-----------------------------------*/
+
+.affil-section { padding-block: 40px 50px; }
+.affil-heading { font-size: var(--fs-4) !important; margin-block-end: 32px; }
+
+.affil-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.affil-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.affil-group-label {
+  font-family: var(--ff-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.affil-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.affil-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+.affil-logo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,201,167,0.2);
+}
+
+.affil-logo-item img {
+  height: 44px;
+  width: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+@media (min-width: 768px) {
+  .affil-strip { gap: 32px; }
+  .affil-group { flex-direction: row; align-items: center; gap: 20px; }
+  .affil-group-label { min-width: 90px; }
+  .affil-logo-item img { height: 48px; }
+}
+
+@media (min-width: 1200px) {
+  .affil-logo-item img { height: 52px; }
+}
+
+
+/*-----------------------------------*\
   #LOGO VISIBILITY — hide on home page
 \*-----------------------------------*/
 
@@ -1640,10 +1709,10 @@ h1, h2, h3, h4,
 .exp-titles { flex:1; min-width:0; }
 .exp-titles h3 { margin-bottom:2px; }
 .inst-logo {
-  width:48px; height:48px; object-fit:contain; opacity:0.85;
-  flex-shrink:0; border-radius:4px;
-  background: rgba(255,255,255,0.04);
-  padding:3px;
+  height:44px; width:auto; max-width:110px;
+  object-fit:contain; opacity:0.9;
+  flex-shrink:0; border-radius:6px;
+  padding:2px;
 }
 [data-theme="dark"]  .inst-logo { filter:brightness(0) invert(0.9) sepia(0.1); }
 [data-theme="light"] .inst-logo { filter:none; opacity:0.9; }

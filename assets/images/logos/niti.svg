@@ -1,6 +1,7 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#F28E2B" fill-opacity="0.15"/>
-  <rect width="48" height="48" rx="8" fill="none" stroke="#F28E2B" stroke-width="1.5" stroke-opacity="0.5"/>
-  <text x="24" y="30" font-family="'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700"
-        fill="#F28E2B" text-anchor="middle" letter-spacing="0.5">NITI</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 60" width="140" height="60">
+  <rect width="140" height="60" rx="6" fill="#138808"/>
+  <text x="70" y="30" font-family="'Arial',sans-serif" font-size="16" font-weight="700"
+        fill="#FFFFFF" text-anchor="middle" letter-spacing="2">NITI Aayog</text>
+  <text x="70" y="50" font-family="'Arial',sans-serif" font-size="8"
+        fill="#FFD700" text-anchor="middle">Govt. of India</text>
 </svg>

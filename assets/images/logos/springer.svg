@@ -1,6 +1,5 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#ED8B00" fill-opacity="0.15"/>
-  <rect width="48" height="48" rx="8" fill="none" stroke="#ED8B00" stroke-width="1.5" stroke-opacity="0.5"/>
-  <text x="24" y="30" font-family="'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700"
-        fill="#ED8B00" text-anchor="middle" letter-spacing="0.5">SPGR</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60">
+  <rect width="150" height="60" rx="6" fill="#ED8B00"/>
+  <text x="75" y="40" font-family="'Georgia',serif" font-size="24" font-weight="700"
+        fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">Springer</text>
 </svg>

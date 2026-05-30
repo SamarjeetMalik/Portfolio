@@ -1,6 +1,7 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#B07AA1" fill-opacity="0.15"/>
-  <rect width="48" height="48" rx="8" fill="none" stroke="#B07AA1" stroke-width="1.5" stroke-opacity="0.5"/>
-  <text x="24" y="30" font-family="'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700"
-        fill="#B07AA1" text-anchor="middle" letter-spacing="0.5">GEO</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 60" width="130" height="60">
+  <rect width="130" height="60" rx="6" fill="#2C3E50"/>
+  <text x="65" y="30" font-family="'Georgia',serif" font-size="13" font-weight="700"
+        fill="#E74C3C" text-anchor="middle">The Geostrata</text>
+  <text x="65" y="50" font-family="'Georgia',serif" font-size="9"
+        fill="#BDC3C7" text-anchor="middle">Defence &amp; Policy</text>
 </svg>

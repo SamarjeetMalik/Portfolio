@@ -1,6 +1,7 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#EDC948" fill-opacity="0.15"/>
-  <rect width="48" height="48" rx="8" fill="none" stroke="#EDC948" stroke-width="1.5" stroke-opacity="0.5"/>
-  <text x="24" y="30" font-family="'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700"
-        fill="#EDC948" text-anchor="middle" letter-spacing="0.5">DRDO</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <rect width="120" height="60" rx="6" fill="#003087"/>
+  <text x="60" y="32" font-family="'Arial',sans-serif" font-size="18" font-weight="700"
+        fill="#FFD700" text-anchor="middle" letter-spacing="2">DRDO</text>
+  <text x="60" y="50" font-family="'Arial',sans-serif" font-size="7.5"
+        fill="#FFFFFF" text-anchor="middle" letter-spacing="0.3">Govt. of India</text>
 </svg>
