@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,7 +23,9 @@
     "description": "Physics-Informed ML researcher at TIFR-GRAPES-3 and IIT Jodhpur. AI & Tech Policy analyst at ORF and NITI Aayog.",
     "sameAs": [
       "https://github.com/SamarjeetMalik",
-      "https://linkedin.com/in/samarjeetmalik"
+      "https://linkedin.com/in/samarjeetmalik",
+      "https://scholar.google.com/citations?user=E4H8WB0AAAAJ",
+      "https://www.instagram.com/_imntsamarjeetmalik/"
     ],
     "affiliation": [
       { "@type": "Organization", "name": "Tata Institute of Fundamental Research (TIFR)" },
@@ -56,7 +58,7 @@
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <!--
@@ -89,7 +91,7 @@
   <header class="header" data-header>
     <div class="container">
 
-      <a href="#" class="logo">
+      <a href="#home" class="logo" onclick="event.preventDefault();showPage('home')" aria-label="Home">
         <span class="logo-text">SAMARJEET<span class="accent">MALIK</span></span>
       </a>
 
@@ -105,44 +107,12 @@
 
       <nav class="navbar" data-navbar>
         <ul class="navbar-list">
-
-          <li>
-            <a href="#home" class="navbar-link">Home</a>
-          </li>
-
-          <li>
-            <a href="#resume" class="navbar-link">Resume</a>
-          </li>
-          <li>
-            <a href="#experience" class="navbar-link">Experience</a>
-          </li>
-
-          <li>
-            <a href="#portfolio" class="navbar-link">Portfolio</a>
-          </li>
-          <li>
-            <a href="#achievements" class="navbar-link">Achievements</a>
-          </li>
-
-          <li>
-            <a href="#publications" class="navbar-link">Publications</a>
-          </li>
-          <li>
-            <a href="#certificates" class="navbar-link">Certifications</a>
-          </li>
-          <li>
-            <a href="#awards" class="navbar-link">Awards</a>
-          </li>
-          <li>
-            <a href="#volunteering" class="navbar-link">Volunteering</a>
-          </li>
-          <li>
-            <a href="#leadership" class="navbar-link">Leadership</a>
-          </li>
-          <li>
-            <a href="#recommendations" class="navbar-link">Recommendations</a>
-          </li>
-
+          <li><a href="#home"            class="navbar-link">Home</a></li>
+          <li><a href="#experience"      class="navbar-link">Experience</a></li>
+          <li><a href="#portfolio"       class="navbar-link">Research</a></li>
+          <li><a href="#publications"    class="navbar-link">Publications</a></li>
+          <li><a href="#achievements"    class="navbar-link">About</a></li>
+          <li><a href="#recommendations" class="navbar-link">More</a></li>
         </ul>
       </nav>
 
@@ -171,21 +141,26 @@
             <h1 class="h1 hero-title">SAMARJEET<br>MALIK</h1>
 
             <p class="hero-subtitle">
-              Predoctoral Researcher &nbsp;|&nbsp; Physics-Informed ML &nbsp;|&nbsp; Astroparticle Physics &nbsp;|&nbsp; AI &amp; Tech Policy
+              Physics-Informed ML &nbsp;·&nbsp; Astroparticle Physics &nbsp;·&nbsp; AI &amp; Tech Policy
             </p>
 
             <a name="resume"></a>
             <p class="section-text">
-              I embed physical laws — air-shower scaling, muon multiplicity, gauge symmetries — directly into neural
-              networks, so the models respect the physics instead of merely fitting the data. Alongside my research
-              at IIT Jodhpur and TIFR–GRAPES-3, I translate that technical depth into AI governance and
-              emerging-tech policy at ORF (CSST) and NITI Aayog.
+              I embed physical laws directly into neural networks — so the models respect the physics instead of merely fitting the data.
+              Predoctoral researcher at IIT Jodhpur &amp; TIFR–GRAPES-3, with hands-on experience at BARC, DRDO, ORF, and NITI Aayog.
+              Selected for LOGML 2026 at Imperial College London.
             </p>
 
-            <a href="https://drive.google.com/file/d/1IoeTaFqFokjgy1-lPOTSLSiRjnL-RrbH/view?usp=sharing" class="btn has-before" download="samarjeetmalik_cv.pdf">
-              <span class="span">Download CV</span>
-              <ion-icon name="download-outline" aria-hidden="true"></ion-icon>
-            </a>
+            <div class="hero-cta-row">
+              <a href="https://drive.google.com/file/d/1IoeTaFqFokjgy1-lPOTSLSiRjnL-RrbH/view?usp=sharing" class="btn has-before" rel="noopener noreferrer" target="_blank">
+                <span class="span">Download CV</span>
+                <ion-icon name="download-outline" aria-hidden="true"></ion-icon>
+              </a>
+              <a href="#portfolio" class="btn-ghost" onclick="event.preventDefault();showPage('portfolio')">
+                <ion-icon name="telescope-outline" aria-hidden="true"></ion-icon>
+                View Research
+              </a>
+            </div>
 
           </div>
 
@@ -228,13 +203,12 @@
 
             <div>
               <p class="section-text">
-                I am Samarjeet Malik — predoctoral researcher and policy analyst with hands-on experience across
-                India's premier research institutions (IIT Jodhpur, TIFR–GRAPES-3, BARC, DRDO) and policy bodies
-                (ORF, NITI Aayog). My work centres on Physics-Informed Neural Networks and Graph Neural Networks
-                for cosmic-ray energy reconstruction, where I embed first-principles constraints directly into
-                learning architectures. I hold a B.Tech in Computer Science from KIIT (CGPA 9.15) and a
-                Predoctoral Fellowship in AI &amp; Data Science from IIT Jodhpur (GPA 4.0). Selected for
-                LOGML 2026 at Imperial College London.
+                Predoctoral researcher and policy analyst with research experience across IIT Jodhpur, TIFR–GRAPES-3,
+                BARC Mumbai, and DRDO Pune — and policy experience at ORF (CSST) and NITI Aayog.
+                My work centres on Physics-Informed Neural Networks and Graph Neural Networks for cosmic-ray energy
+                reconstruction, embedding first-principles constraints directly into learning architectures.
+                B.Tech Computer Science, KIIT University (CGPA&nbsp;9.15) · Predoctoral Fellowship in AI &amp; Data
+                Science, IIT Jodhpur (GPA&nbsp;4.0) · Selected for LOGML 2026, Imperial College London.
               </p>
 
               <a href="mailto:samarjeetmalik.gs5@gmail.com" class="btn has-before">samarjeetmalik.gs5@gmail.com</a>
@@ -365,7 +339,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Mar-2026<br>Present</p>
+                  <p>Mar, 2026<br>Present</p>
                   <div>
                     <h3 class="h3 card-title">Research Intern – Centre for Security, Strategy &amp; Technology (CSST)</h3>
                     <h3>Observer Research Foundation (ORF)</h3>
@@ -394,7 +368,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Feb-2026<br>Apr-2026</p>
+                  <p>Feb, 2026<br>Apr, 2026</p>
                   <div>
                     <h3 class="h3 card-title">Impact Fellow – Data &amp; Political Analytics Program</h3>
                     <h3>Inclusive Minds, Bengaluru (Hybrid)</h3>
@@ -422,7 +396,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Jan-2025<br>Feb-2026</p>
+                  <p>Jan, 2025<br>Feb, 2026</p>
                   <div>
                     <h3 class="h3 card-title">Machine Learning Research Intern – Astroparticle Physics</h3>
                     <h3>Tata Institute of Fundamental Research (TIFR) – GRAPES-3, Ooty</h3>
@@ -446,7 +420,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Dec-2024<br>Feb-2026</p>
+                  <p>Dec, 2024<br>Feb, 2026</p>
                   <div>
                     <h3 class="h3 card-title">Predoctoral Research Fellow – Physics-Informed Machine Learning</h3>
                     <h3>Indian Institute of Technology (IIT) Jodhpur &amp; Institute of Physics (IOP), Bhubaneswar</h3>
@@ -481,7 +455,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Jan-2025<br>Mar-2025</p>
+                  <p>Jan, 2025<br>Mar, 2025</p>
                   <div>
                     <h3 class="h3 card-title">Research Intern – Economics &amp; Finance Vertical</h3>
                     <h3>National Institution for Transforming India (NITI Aayog)</h3>
@@ -510,7 +484,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Sep-2024<br>Mar-2026</p>
+                  <p>Sep, 2024<br>Mar, 2026</p>
                   <div>
                     <h3 class="h3 card-title">Asteroid Detection &amp; Computational Astrophysics Researcher</h3>
                     <h3>International Astronomical Search Collaboration (IASC) — NASA Partner, Texas</h3>
@@ -541,7 +515,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Jul-2024<br>Nov-2024</p>
+                  <p>Jul, 2024<br>Nov, 2024</p>
                   <div>
                     <h3 class="h3 card-title">Applied Physics Research Intern</h3>
                     <h3>Bhabha Atomic Research Centre (BARC), Mumbai</h3>
@@ -569,7 +543,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Jul-2024<br>Sep-2024</p>
+                  <p>Jul, 2024<br>Sep, 2024</p>
                   <div>
                     <h3 class="h3 card-title">Policy Analyst</h3>
                     <h3>The Geostrata, New Delhi</h3>
@@ -591,7 +565,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-content">
-                  <p>Dec-2023<br>Apr-2024</p>
+                  <p>Dec, 2023<br>Apr, 2024</p>
                   <div>
                     <h3 class="h3 card-title">AI–ML Research Intern</h3>
                     <h3>Defence Research and Development Organization (DRDO), Pune</h3>
@@ -1142,7 +1116,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Sep-2023</p>
+              <p>Sep, 2023</p>
               <div>
                 <h3 class="h4 card-title">Inequality Analysis using Stata: Disaggregated Data from Surveys</h3>
                 <h4>World Health Organization</h4>
@@ -1158,7 +1132,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Apr-2023</p>
+              <p>Apr, 2023</p>
               <div>
                 <h3 class="h4 card-title">Data Analyst for Management</h3>
                 <h4>The London School of Economics and Political Science (LSE)</h4>
@@ -1174,7 +1148,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Feb-2023</p>
+              <p>Feb, 2023</p>
               <div>
                 <h3 class="h4 card-title">Cybersecurity Fundamentals</h3>
                 <h4>UNESCO</h4>
@@ -1190,7 +1164,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Nov-2022</p>
+              <p>Nov, 2022</p>
               <div>
                 <h3 class="h4 card-title">Leadership Management</h3>
                 <h4>The Wharton School</h4>
@@ -1206,7 +1180,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Sep-2022</p>
+              <p>Sep, 2022</p>
               <div>
                 <h3 class="h4 card-title">Cyber Risk Analysis</h3>
                 <h4>International Monetary Fund</h4>
@@ -1223,7 +1197,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Jul-2022</p>
+              <p>Jul, 2022</p>
               <div>
                 <h3 class="h4 card-title">Macroeconomics of Climate Change</h3>
                 <h4>International Monetary Fund</h4>
@@ -1239,7 +1213,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Apr-2022</p>
+              <p>Apr, 2022</p>
               <div>
                 <h3 class="h4 card-title">CS50</h3>
                 <h4>Harvard University</h4>
@@ -1255,7 +1229,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Feb-2022</p>
+              <p>Feb, 2022</p>
               <div>
                 <h3 class="h4 card-title">Public Debt, Investment and Growth Analysis</h3>
                 <h4>International Monetary Fund</h4>
@@ -1271,7 +1245,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Nov-2021</p>
+              <p>Nov, 2021</p>
               <div>
                 <h3 class="h4 card-title">Innovation Leadership</h3>
                 <h4>Massachusetts Institute of Technology</h4>
@@ -1362,7 +1336,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Apr-2024</p>
+              <p>Apr, 2024</p>
               <div>
                 <h4 class="h4 card-title">Certificate of Distinction in Green Olympiad</h4>
                 <h4>UNESCO and Ministry of Environment</h4>
@@ -1395,7 +1369,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Jul-2019</p>
+              <p>Jul, 2019</p>
               <div>
                 <h4 class="h4 card-title">North Zone Captain, 2× Gold Medallist – 110m Hurdles &amp; 4×100m Relay</h4>
                 <h4>SGFI – School Games Federation of India</h4>
@@ -1412,7 +1386,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Sep-2018</p>
+              <p>Sep, 2018</p>
               <div>
                 <h4 class="h4 card-title">Judo – North Zone &amp; Haryana Silver Medalist, U-17/U-19, 60 kg</h4>
                 <h4>PSGAI – Public School Games Association of India</h4>
@@ -1428,7 +1402,7 @@
         <li>
           <div class="blog-card">
             <div class="card-content">
-              <p>Dec-2017</p>
+              <p>Dec, 2017</p>
               <div>
                 <h4 class="h4 card-title">Student of the Year</h4>
                 <h4>The Shriram Millennium School</h4>
@@ -1797,8 +1771,7 @@
         </li>
 
         <li>
-          <a href="mailto:samarjeetmalik.gs5@gmail.com" class="footer-link">samarjeetmalik.gs5@gmail.com</a>
-          <a href="tel:+919315932844" class="footer-link">+91 9315932844</a>
+          <a href="mailto:samarjeetmalik.gs5@gmail.com" class="footer-link" rel="noopener">samarjeetmalik.gs5@gmail.com</a>
         </li>
 
       </ul>
@@ -1818,14 +1791,26 @@
       <ul class="social-list">
 
         <li>
-          <a href="https://github.com/SamarjeetMalik" class="social-link">
+          <a href="https://github.com/SamarjeetMalik" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <ion-icon name="logo-github"></ion-icon>
           </a>
         </li>
 
         <li>
-          <a href="https://www.linkedin.com/in/samarjeetmalik" class="social-link">
+          <a href="https://www.linkedin.com/in/samarjeetmalik" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
             <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://scholar.google.com/citations?user=E4H8WB0AAAAJ" class="social-link" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer" title="Google Scholar">
+            <ion-icon name="school-outline"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.instagram.com/_imntsamarjeetmalik/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-instagram"></ion-icon>
           </a>
         </li>
 
@@ -1854,6 +1839,7 @@
 </body>
 
 </html>
+
 
 
 

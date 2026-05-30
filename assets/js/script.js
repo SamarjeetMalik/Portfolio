@@ -199,6 +199,9 @@ themeBtn.addEventListener("click", function () {
 const pageSections = document.querySelectorAll("[data-page]");
 const navLinks     = document.querySelectorAll(".navbar-link[href]");
 
+// Expose globally for inline onclick handlers
+window.showPage = showPage;
+
 function showPage(pageId) {
   // hide all sections
   pageSections.forEach(function (s) { s.classList.remove("page-active"); });
@@ -213,6 +216,11 @@ function showPage(pageId) {
     const target = link.getAttribute("href").replace("#", "");
     link.classList.toggle("page-active", target === pageId);
   });
+
+  // Toggle body page class (used for logo visibility, etc.)
+  document.body.className = document.body.className
+    .split(" ").filter(function(c) { return !/^page-/.test(c); }).join(" ");
+  document.body.classList.add("page-" + pageId);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", "#" + pageId);

@@ -20,20 +20,24 @@
    * colors
    */
 
-  --raisin-black: hsla(231, 10%, 14%, 1);
-  --roman-silver: hsla(229, 10%, 57%, 1);
-  --eerie-black: hsla(228, 9%, 10%, 1);
-  --black: hsla(0, 0%, 0%, 1);
-  --white: hsla(0, 0%, 100%, 1);
-  --white_a10: hsla(0, 0%, 100%, 0.1);
-  --white_a5: hsla(0, 0%, 100%, 0.05);
-  --accent: hsla(182, 63%, 45%, 1);        /* teal #2cb5b8 */
+  --raisin-black: hsla(215, 28%, 14%, 1);   /* deep navy surface */
+  --roman-silver: hsla(220, 14%, 60%, 1);
+  --eerie-black:  hsla(216, 28%, 7%, 1);    /* deep navy bg */
+  --black:  hsla(0, 0%, 0%, 1);
+  --white:  hsla(0, 0%, 100%, 1);
+  --white_a10: hsla(0, 0%, 100%, 0.10);
+  --white_a5:  hsla(0, 0%, 100%, 0.05);
+  --accent: #00C9A7;                        /* electric teal */
+  --accent-dim: rgba(0,201,167,0.15);
+  --navy: #0D1B2A;
 
   /**
    * typography
    */
 
-  --ff-syne: 'Syne', sans-serif;
+  --ff-syne:  'Syne', sans-serif;
+  --ff-inter: 'Inter', 'Segoe UI', sans-serif;
+  --ff-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   --fs-1: 4.8rem;
   --fs-2: 4.5rem;
@@ -124,6 +128,7 @@ html {
 body {
   background-color: var(--eerie-black);
   color: var(--roman-silver);
+  font-family: var(--ff-inter);
   font-size: 1.6rem;
   line-height: 1.75;
   overflow: hidden;
@@ -1449,3 +1454,223 @@ footer[data-page].page-active { display: flex; }
   font-family: var(--ff-syne);
   letter-spacing: 0.03em;
 }
+
+
+/*-----------------------------------*\
+  #LOGO VISIBILITY — hide on home page
+\*-----------------------------------*/
+
+/* On home, the hero already shows the name — hide the nav logo */
+body.page-home .logo { opacity: 0; pointer-events: none; }
+.logo { transition: opacity 0.25s ease; }
+
+/* On all other pages, ensure the logo is visible */
+body:not(.page-home) .logo { opacity: 1; }
+
+
+/*-----------------------------------*\
+  #SECTION PADDING FIXES
+  Sections that lack the .section class need explicit top padding
+  so content isn't hidden behind the fixed header (~72px)
+\*-----------------------------------*/
+
+.portfolio  { padding-block-start: 100px; padding-block-end: 60px; }
+.experience { padding-block-start: 100px; padding-block-end: 60px; }
+
+
+/*-----------------------------------*\
+  #TYPOGRAPHY UPGRADES
+\*-----------------------------------*/
+
+/* Body copy uses Inter */
+.section-text,
+.card-text,
+p:not(.section-subtitle):not(.hero-subtitle) {
+  font-family: var(--ff-inter);
+  line-height: 1.75;
+}
+
+/* Headings keep Syne */
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4,
+.hero-title, .section-title, .card-title { font-family: var(--ff-syne); }
+
+/* Metric numbers / code fragments — JetBrains Mono */
+.mono, .metric, code {
+  font-family: var(--ff-mono);
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
+/* Accent teal glow on hero title */
+.hero-title {
+  background: linear-gradient(135deg, #fff 60%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/*-----------------------------------*\
+  #TAG / SKILL-CHIP UPGRADE
+  Code-aesthetic pill with monospace font
+\*-----------------------------------*/
+
+.tag {
+  font-family: var(--ff-mono) !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.02em;
+  border-color: rgba(0,201,167,0.20) !important;
+}
+.tag:hover {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 12px rgba(0,201,167,0.35);
+}
+
+
+/*-----------------------------------*\
+  #EXPERIENCE / WORK-LIST DATES
+\*-----------------------------------*/
+
+.blog-card .card-content > p:first-child {
+  font-family: var(--ff-mono);
+  font-size: 1.1rem;
+  color: var(--accent);
+  opacity: 0.85;
+  min-width: 90px;
+  line-height: 1.5;
+}
+
+
+/*-----------------------------------*\
+  #NAVBAR — 6-item professional layout
+\*-----------------------------------*/
+
+.navbar-link {
+  font-family: var(--ff-inter) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.03em !important;
+}
+
+/* Active underline uses new teal */
+.navbar-link.page-active {
+  color: var(--accent) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+
+/*-----------------------------------*\
+  #HERO REFINEMENTS
+\*-----------------------------------*/
+
+.hero-subtitle {
+  font-family: var(--ff-mono);
+  font-size: 1.15rem !important;
+  letter-spacing: 0.08em;
+  color: var(--accent) !important;
+}
+
+.hero .btn {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  font-family: var(--ff-inter);
+  font-weight: 600;
+  transition: all 0.25s;
+}
+.hero .btn:hover {
+  background: var(--accent);
+  color: var(--navy);
+}
+
+/* Secondary ghost CTA */
+.hero-cta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 28px;
+  border: 1.5px solid var(--white_a10);
+  border-radius: var(--radius-pill);
+  color: var(--roman-silver);
+  font-family: var(--ff-inter);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+  max-width: max-content;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/*-----------------------------------*\
+  #SECTION ACCENT BORDER
+\*-----------------------------------*/
+
+.section-subtitle {
+  font-family: var(--ff-mono);
+  letter-spacing: 0.12em;
+}
+
+
+/*-----------------------------------*\
+  #PUBLICATION TAXONOMY
+\*-----------------------------------*/
+
+.pub-status {
+  display: inline-block;
+  font-family: var(--ff-mono);
+  font-size: 1.05rem;
+  padding: 2px 9px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.pub-status.published { background: rgba(0,201,167,0.15); color: var(--accent); border: 1px solid rgba(0,201,167,0.35); }
+.pub-status.review    { background: rgba(242,142,43,0.12); color: #F28E2B;       border: 1px solid rgba(242,142,43,0.35); }
+.pub-status.prep      { background: rgba(160,160,180,0.10); color: #aaa;          border: 1px solid rgba(160,160,180,0.25); }
+
+/* Colored left border per status */
+.pub-card-published { border-left: 3px solid var(--accent); padding-left: 14px; }
+.pub-card-review    { border-left: 3px solid #F28E2B;       padding-left: 14px; }
+.pub-card-prep      { border-left: 3px solid #666;          padding-left: 14px; }
+
+
+/*-----------------------------------*\
+  #SOCIAL LINKS — Scholar + Instagram
+\*-----------------------------------*/
+
+.social-link[aria-label="Google Scholar"]:hover { background: #4285F4; border-color: #4285F4; }
+.social-link[aria-label="Instagram"]:hover      { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-color: #dc2743; }
+
+
+/*-----------------------------------*\
+  #BACK-TO-TOP (teal)
+\*-----------------------------------*/
+
+.back-top-btn { background-color: var(--accent); box-shadow: 0 4px 16px rgba(0,201,167,0.4); }
+.back-top-btn:hover { background-color: var(--white); color: var(--accent); }
+
+
+/*-----------------------------------*\
+  #LIGHT THEME — override new accent
+\*-----------------------------------*/
+
+[data-theme="light"] .hero-title {
+  background: linear-gradient(135deg, var(--navy) 60%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
