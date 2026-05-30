@@ -1270,22 +1270,23 @@ object-fit:fill; }
 [data-theme="light"] .navbar-link { color: var(--roman-silver) !important; }
 [data-theme="light"] .navbar-link:hover { color: var(--white) !important; }
 
-/* Adjust header container gap */
+/* Adjust header container gap + ordering */
 .header .container { gap: 12px; }
 
-/* Theme btn stays next to logo */
-.theme-btn { order: -1; margin-left: auto; }
+/* logo (DOM order 1) → navbar (order 2, fills gap) → theme-btn (order 3) */
+.navbar    { order: 2; }
+.theme-btn { order: 3; flex-shrink: 0; margin-left: 0; }
 
 
 /*-----------------------------------*\
   #SECTION PAGE SWITCHER
 \*-----------------------------------*/
 
-/* Hide every labelled section by default */
-[data-page] { display: none !important; }
+/* Hide sections that are NOT the active one — no competing !important */
+[data-page]:not(.page-active) { display: none !important; }
 
-/* Show only the active section */
-[data-page].page-active { display: block !important; }
+/* Active section: restore normal flow */
+[data-page].page-active { display: block; }
 
-/* Footer (flex layout) needs its own display value */
-footer[data-page].page-active { display: flex !important; }
+/* Footer uses flex internally */
+footer[data-page].page-active { display: flex; }
