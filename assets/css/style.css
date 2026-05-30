@@ -1632,6 +1632,22 @@ h1, h2, h3, h4,
 .badge-amber { font-size:1.1rem; background:rgba(242,142,43,0.12); color:#F28E2B; padding:3px 10px; border-radius:4px; font-weight:600; border:1px solid rgba(242,142,43,0.30); font-family:var(--ff-mono); display:inline-block; margin-top:6px; }
 .badge-gray  { font-size:1.1rem; background:rgba(160,160,180,0.10); color:#9aa3c2; padding:3px 10px; border-radius:4px; font-weight:600; border:1px solid rgba(160,160,180,0.20); font-family:var(--ff-mono); display:inline-block; margin-top:6px; }
 
+/*-----------------------------------*\
+  #INSTITUTION LOGOS (experience cards)
+\*-----------------------------------*/
+
+.exp-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px; }
+.exp-titles { flex:1; min-width:0; }
+.exp-titles h3 { margin-bottom:2px; }
+.inst-logo {
+  width:48px; height:48px; object-fit:contain; opacity:0.85;
+  flex-shrink:0; border-radius:4px;
+  background: rgba(255,255,255,0.04);
+  padding:3px;
+}
+[data-theme="dark"]  .inst-logo { filter:brightness(0) invert(0.9) sepia(0.1); }
+[data-theme="light"] .inst-logo { filter:none; opacity:0.9; }
+
 /* Rec card header layout */
 .rec-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
 .rec-lor-badge {
