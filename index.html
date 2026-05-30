@@ -110,6 +110,7 @@
           <li><a href="#home"            class="navbar-link">Home</a></li>
           <li><a href="#experience"      class="navbar-link">Experience</a></li>
           <li><a href="#portfolio"       class="navbar-link">Research</a></li>
+          <li><a href="#policy"          class="navbar-link">Policy</a></li>
           <li><a href="#publications"    class="navbar-link">Publications</a></li>
           <li><a href="#achievements"    class="navbar-link">About</a></li>
           <li><a href="#recommendations" class="navbar-link">More</a></li>
@@ -150,7 +151,7 @@
             </p>
 
             <div class="hero-cta-row">
-              <a href="https://drive.google.com/file/d/1IoeTaFqFokjgy1-lPOTSLSiRjnL-RrbH/view?usp=sharing" class="btn has-before" rel="noopener noreferrer" target="_blank">
+              <a href="./assets/cv/samarjeet-malik-cv.pdf" class="btn has-before" rel="noopener noreferrer" target="_blank">
                 <span class="span">Download CV</span>
                 <ion-icon name="download-outline" aria-hidden="true"></ion-icon>
               </a>
@@ -228,6 +229,61 @@
             </a>
           </div>
           <p class="kg-hint">Drag to rotate · Scroll to zoom · Click any node to inspect · Hover for details</p>
+        </div>
+      </section>
+
+      <!-- ABOUT (home page) -->
+      <section class="section about-section" data-page="home" id="about">
+        <div class="container">
+          <p class="section-subtitle">About Me</p>
+          <h2 class="h2 section-title">Who I Am</h2>
+          <div class="about-content">
+            <p class="section-text">
+              I build neural networks that respect physics — not just fit data. As a predoctoral researcher at IIT Jodhpur and TIFR–GRAPES-3, I embed electromagnetic scaling laws, muon multiplicity constraints, and zenith monotonicity directly into learning architectures, recovering theoretical predictions like the Heitler–Matthews exponent at <em>0.03σ</em> of the accepted value. My work spans Physics-Informed Neural Networks for multi-objective PDE systems, spectral Graph Neural Networks for detector-topology-aware cosmic-ray reconstruction, and GPU-accelerated surrogate models for high-dimensional COMSOL multiphysics simulations at BARC and DRDO.
+            </p>
+            <p class="section-text" style="margin-top:16px">
+              The same first-principles discipline shapes how I think about governance. At ORF's Centre for Security, Strategy &amp; Technology, I map structural gaps between civilian AI regulation and defence deployments, analyse blockchain steganography channels exploited in terror financing, and design dual-use oversight mechanisms. At NITI Aayog, I quantified a <strong>$967 billion GDP impact</strong> of AI by 2030 and drafted architecture for a National AI Mission 2.0. These are not separate careers — they are the same analytical instinct applied at different scales of complex system.
+            </p>
+            <div class="about-callout">
+              <div class="callout-item">
+                <span class="callout-icon">₹3.45 Cr</span>
+                <span class="callout-text">Raised for WWF India's Young Conservationist Programme through corporate partnerships, engaging 23,000+ community members on animal welfare during the pandemic.</span>
+              </div>
+              <div class="callout-item">
+                <span class="callout-icon">80 / 80</span>
+                <span class="callout-text">Served as scribe for a partially blind classmate in CBSE Class XII Boards — he scored full marks in English.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESEARCH FOCUS (home page) -->
+      <section class="section research-focus-section" data-page="home" id="research-focus">
+        <div class="container">
+          <p class="section-subtitle">Focus Areas</p>
+          <h2 class="h2 section-title">Research Focus</h2>
+          <div class="focus-grid">
+
+            <div class="focus-card">
+              <div class="focus-icon">∂L/∂θ</div>
+              <h3 class="h3 card-title">Physics-Informed Neural Networks</h3>
+              <p class="card-text">Embedding physical constraints as soft regularisers on network manifolds. Key contributions: <strong>ConFIG</strong> — 30% faster multi-objective convergence via geometric gradient projection; <strong>PIXEL/SPINN</strong> — 529× shape-optimisation improvement over MLP baselines; BARC multiphysics surrogates achieving 98.7% accuracy over 10,000+ samples; DRDO GPR-thermal fusion for sub-surface imaging.</p>
+            </div>
+
+            <div class="focus-card">
+              <div class="focus-icon">✦ μ β</div>
+              <h3 class="h3 card-title">Astroparticle Physics &amp; GNNs</h3>
+              <p class="card-text">Spectral Graph Neural Networks for detector-topology-aware air-shower reconstruction at GRAPES-3. <strong>PhysGraph-3</strong> recovers Heitler–Matthews exponent β = 0.899 ± 0.001 at 0.03σ of theory. <strong>JetMAE</strong>: masked-autoencoder Transformer for quark/gluon jet tagging — SHAP confirms QCD colour-factor ratio C<sub>A</sub>/C<sub>F</sub> = 9/4; PySR symbolic regression recovers 95.9% of neural AUC from a single closed-form expression.</p>
+            </div>
+
+            <div class="focus-card">
+              <div class="focus-icon">⚖ ⚡</div>
+              <h3 class="h3 card-title">AI Governance &amp; Tech Policy</h3>
+              <p class="card-text">Structural analysis of India's Dual-Use AI Governance Gap at ORF CSST. Research on blockchain steganography for terror financing, AI-driven smurfing detection, and satellite communication vulnerabilities. At NITI Aayog: National AI Mission 2.0 architecture, Digital Public Intelligence (DPI 2.0) framework, and $967B GDP impact projection for AI adoption by 2030.</p>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -690,7 +746,25 @@
         </div>
         <ul class="blog-list" style="margin-top:20px">
 
-          
+          <!-- JetMAE -->
+          <li>
+            <div class="blog-card">
+              <figure class="card-banner img-holder" style="--width:700;--height:470;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#0D1B2A 50%,#0D7377 100%);">
+                <span style="font-family:var(--ff-mono);font-size:2.2rem;color:rgba(255,255,255,0.75);letter-spacing:0.12em;">JetMAE</span>
+              </figure>
+              <div class="card-content">
+                <div>
+                  <h3 class="h3 card-title">JetMAE – Masked Autoencoder for Quark/Gluon Jet Tagging</h3>
+                  <p class="card-text">Masked-autoencoder Transformer for particle-physics jet tagging. SHAP attribution confirmed QCD colour-factor ratio C<sub>A</sub>/C<sub>F</sub> = 9/4; PySR symbolic regression recovered 95.9% of neural AUC from a single closed-form expression. <strong>Accepted — Stanford PAI26, 2026.</strong></p>
+                  <p class="card-text">Tech Stack: Python · PyTorch · PySR · SHAP</p>
+                  <a href="https://github.com/SamarjeetMalik/JetMAE" class="btn has-before" target="_blank" rel="noopener noreferrer">
+                    <span class="span">View project</span><ion-icon name="arrow-forward"></ion-icon>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
 
 
           
@@ -805,7 +879,7 @@
                     high-fidelity physics simulations. Supports multi-task learning with robust validation.
                   </p>
                   <p class="card-text">Tech Stack: Python · TensorFlow</p>
-                  <a href="https://github.com/SamarjeetMalik/Neural-Nets-for-point-cloud" class="btn has-before">
+                  <a href="https://github.com/SamarjeetMalik/Conflict-free-PINN-training-methods" class="btn has-before">
                     <span class="span">View project</span>
                     <ion-icon name="arrow-forward"></ion-icon>
                   </a>
@@ -882,6 +956,71 @@
 
       </section>
 
+
+      <!-- POLICY WRITING -->
+      <section class="section blog policy-section" aria-labelledby="policy-label" data-page="policy" id="policy">
+        <div class="container">
+          <p class="section-subtitle" id="policy-label">Policy Work</p>
+          <h2 class="h2 section-title">Policy Writing</h2>
+          <p class="section-text" style="margin-bottom:28px;max-width:700px">Research and analysis produced at ORF Centre for Security, Strategy &amp; Technology (CSST) and NITI Aayog. Views are personal.</p>
+
+          <ul class="pubication-list">
+
+            <li>
+              <div class="blog-card">
+                <div class="card-content">
+                  <div>
+                    <div class="exp-header"><div class="exp-titles"><h3 class="h3 card-title">Dead Drops on the Blockchain: Terror Networks and On-Chain Steganography</h3></div><img src="./assets/images/logos/orf.jpg" alt="ORF" class="inst-logo"></div>
+                    <p class="card-text"><em>ORF – Centre for Security, Strategy &amp; Technology · April 2026</em><br>I analyse how terrorist networks exploit subliminal signature channels in blockchain transactions to embed encrypted operational communications within cryptocurrency transfers, remaining undetectable by FATF guidance and existing financial surveillance platforms — proposing reclassification of non-financial blockchain data and establishment of FININT-SIGINT steganalysis cells.</p>
+                    <span class="badge-teal">ORF / CSST · April 2026</span>
+                    <a href="./assets/policy/dead-drops-blockchain-orf.pdf" class="btn has-before" target="_blank" rel="noopener" style="margin-left:10px;display:inline-flex;vertical-align:middle;margin-top:8px"><span class="span">Read</span><ion-icon name="arrow-forward"></ion-icon></a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                <div class="card-content">
+                  <div>
+                    <div class="exp-header"><div class="exp-titles"><h3 class="h3 card-title">Watching the Money, Missing the Message: Covert Communication Risks in Blockchain Transactions</h3></div><img src="./assets/images/logos/orf.jpg" alt="ORF" class="inst-logo"></div>
+                    <p class="card-text"><em>ORF · April 2026</em><br>I identify a structural blind spot in blockchain analytics: platforms optimised for financial flow surveillance cannot detect non-financial information — encrypted operational orders — embedded in transaction metadata using on-chain steganography.</p>
+                    <span class="badge-amber">ORF · April 2026</span>
+                    <a href="./assets/policy/orf-moneymatters.pdf" class="btn has-before" target="_blank" rel="noopener" style="margin-left:10px;display:inline-flex;vertical-align:middle;margin-top:8px"><span class="span">Read</span><ion-icon name="arrow-forward"></ion-icon></a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                <div class="card-content">
+                  <div>
+                    <div class="exp-header"><div class="exp-titles"><h3 class="h3 card-title">Afghanistan: Economic Assessment Pre &amp; Post 2021</h3></div><img src="./assets/images/logos/orf.jpg" alt="ORF" class="inst-logo"></div>
+                    <p class="card-text"><em>ORF – CSST · March 2026</em><br>I document Afghanistan's economic reversal following the Taliban's August 2021 return to power — mapping the contraction driven by suspension of USD 8+ billion in annual foreign aid, frozen central bank reserves, and collapse of the formal banking sector, with sectoral analysis across agriculture, mining, trade, and labour markets.</p>
+                    <span class="badge-amber">ORF / CSST · March 2026</span>
+                    <span class="badge-gray" style="margin-left:6px">PDF — add to /assets/policy/</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                <div class="card-content">
+                  <div>
+                    <div class="exp-header"><div class="exp-titles"><h3 class="h3 card-title">Artificial Intelligence in India: Sovereign Intelligence for Viksit Bharat</h3></div><img src="./assets/images/logos/niti.png" alt="NITI Aayog" class="inst-logo"></div>
+                    <p class="card-text"><em>NITI Aayog Working Paper DP/2026/01 · 2026</em><br>I present a comprehensive policy framework for India's AI ecosystem spanning compute infrastructure, talent pipelines, R&amp;D investment, geostrategic positioning under the US-India TRUST Initiative, and governance architecture — projecting a <strong>$967 billion GDP impact</strong> of AI adoption by 2030 and proposing National AI Mission 2.0 with Digital Public Intelligence (DPI 2.0).</p>
+                    <span class="badge-teal">NITI Aayog · 2026</span>
+                    <a href="./assets/policy/niti-aayog-ai-india.pdf" class="btn has-before" target="_blank" rel="noopener" style="margin-left:10px;display:inline-flex;vertical-align:middle;margin-top:8px"><span class="span">Read</span><ion-icon name="arrow-forward"></ion-icon></a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </section>
 
       <!-- ACHIEVEMENTS-->
             <section class="section blog" aria-labelledby="blog-label" data-page="achievements">
@@ -1794,6 +1933,26 @@
     </div>
   </section>
 
+
+  <!-- CONTACT FORM (recommendations page) -->
+  <section class="section blog" aria-labelledby="contact-label" data-page="recommendations">
+    <div class="container">
+      <p class="section-subtitle" id="contact-label">Contact</p>
+      <h2 class="h2 section-title">Get in Touch</h2>
+      <p class="section-text" style="margin-bottom:24px;max-width:600px">Feel free to reach out about research collaborations, policy work, or speaking engagements.</p>
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" target="_blank">
+        <input type="text"  name="name"    placeholder="Your name"    required>
+        <input type="email" name="email"   placeholder="Your email"   required>
+        <input type="text"  name="subject" placeholder="Subject">
+        <textarea name="message" rows="5"  placeholder="Your message" required></textarea>
+        <button type="submit" class="btn has-before">
+          <span class="span">Send Message</span>
+          <ion-icon name="paper-plane-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </form>
+      <p style="margin-top:16px;font-size:1.3rem;color:var(--roman-silver)">Or email directly: <a href="mailto:samarjeetmalik.gs5@gmail.com" style="color:var(--accent)">samarjeetmalik.gs5@gmail.com</a></p>
+    </div>
+  </section>
 
   <!--
     - #FOOTER
