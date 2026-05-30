@@ -216,6 +216,11 @@ function showPage(pageId) {
 
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", "#" + pageId);
+
+  // Lazy-init the knowledge graph the first time Home is shown
+  if (pageId === "home" && typeof window.initKnowledgeGraph === "function") {
+    requestAnimationFrame(window.initKnowledgeGraph);
+  }
 }
 
 // init — respect URL hash, otherwise default to home

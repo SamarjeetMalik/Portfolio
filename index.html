@@ -162,6 +162,10 @@
       <section id="main-content" class="section hero" aria-label="home" data-page="home">
         <div class="container">
 
+          <div class="hero-banner">
+            <img src="./assets/images/hero-banner.jpg" width="800" height="800" alt="Samarjeet Malik" class="w-100">
+          </div>
+
           <div class="hero-content">
 
             <h1 class="h1 hero-title">SAMARJEET<br>MALIK</h1>
@@ -170,9 +174,6 @@
               Predoctoral Researcher &nbsp;|&nbsp; Physics-Informed ML &nbsp;|&nbsp; Astroparticle Physics &nbsp;|&nbsp; AI &amp; Tech Policy
             </p>
 
-            <div class="hero-banner">
-              <img src="./assets/images/hero-banner.jpg" width="800" height="800" alt="Samarjeet Malik" class="w-100">
-            </div>
             <a name="resume"></a>
             <p class="section-text">
               I embed physical laws — air-shower scaling, muon multiplicity, gauge symmetries — directly into neural
@@ -183,12 +184,31 @@
 
             <a href="https://drive.google.com/file/d/1IoeTaFqFokjgy1-lPOTSLSiRjnL-RrbH/view?usp=sharing" class="btn has-before" download="samarjeetmalik_cv.pdf">
               <span class="span">Download CV</span>
-
               <ion-icon name="download-outline" aria-hidden="true"></ion-icon>
             </a>
 
           </div>
 
+        </div>
+      </section>
+
+      <!-- KNOWLEDGE GRAPH (home page, below hero) -->
+      <section class="section graph-section" data-page="home">
+        <div class="container">
+          <p class="section-subtitle">Career Network</p>
+          <h2 class="h2 section-title">Knowledge Graph</h2>
+          <div id="kg-wrap">
+            <svg id="kg-svg"></svg>
+            <div class="kg-tooltip" id="kg-tip"></div>
+            <div class="kg-legend">
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#f0c040"></div>Core</div>
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#2cb5b8"></div>Research</div>
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ff7043"></div>Policy</div>
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ab47bc"></div>Skills</div>
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#42a5f5"></div>Outputs</div>
+              <div class="kg-legend-item"><div class="kg-legend-dot" style="background:#ec407a"></div>Awards</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1823,6 +1843,8 @@
   <!--
     - custom js link
   -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="./assets/js/knowledge-graph.js"></script>
   <script src="./assets/js/script.js"></script>
 
   <!--
