@@ -1108,14 +1108,15 @@ object-fit:fill; }
 
 .logo-text {
   font-family: var(--ff-syne);
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-weight: var(--fw-800);
   color: var(--white);
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
+  line-height: 1.1;
 }
 
-.logo-text .accent { color: var(--accent); }
+.logo-text .accent { color: var(--accent); display: block; font-size: 2.6rem; }
 
 /* Skip-to-content link (accessibility) */
 .skip-link {
@@ -1293,3 +1294,52 @@ footer[data-page].page-active { display: flex; }
 
 /* Footer is always visible (no data-page) — acts as persistent contact strip */
 .footer { display: flex; }
+
+
+/*-----------------------------------*\
+  #LIGHT MODE CONTRAST FIXES
+\*-----------------------------------*/
+
+/* Replaces inline style="color:white" — theme-aware */
+.card-text-light { color: var(--white); }
+
+/* Force all body-level text to respect --white in light mode */
+[data-theme="light"] body,
+[data-theme="light"] .section-text,
+[data-theme="light"] .card-text,
+[data-theme="light"] .card-text-light,
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] .h1,
+[data-theme="light"] .h2,
+[data-theme="light"] .h3,
+[data-theme="light"] .h4,
+[data-theme="light"] strong,
+[data-theme="light"] em {
+  color: var(--white);
+}
+
+/* Section titles and subtitles */
+[data-theme="light"] .section-title,
+[data-theme="light"] .card-title { color: var(--white); }
+
+/* Accent stays teal in both modes */
+[data-theme="light"] .section-subtitle,
+[data-theme="light"] .accent { color: var(--accent); }
+
+/* Skill / tag pills readable in light mode */
+[data-theme="light"] .tag {
+  color: var(--white);
+  border-color: var(--white_a10);
+}
+
+/* Footer links */
+[data-theme="light"] .footer-link,
+[data-theme="light"] .footer-list-title { color: var(--white); }
+
+/* Hero subtitle */
+[data-theme="light"] .hero-subtitle { color: var(--roman-silver); }
