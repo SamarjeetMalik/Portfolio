@@ -1290,3 +1290,6 @@ object-fit:fill; }
 
 /* Footer uses flex internally */
 footer[data-page].page-active { display: flex; }
+
+/* Footer is always visible (no data-page) — acts as persistent contact strip */
+.footer { display: flex; }
