@@ -1211,3 +1211,81 @@ object-fit:fill; }
 /* Light mode → show moon (click to switch to dark) */
 [data-theme="light"] .theme-btn ion-icon[name="sunny-outline"] { display: none;  }
 [data-theme="light"] .theme-btn ion-icon[name="moon-outline"]  { display: block; }
+
+
+/*-----------------------------------*\
+  #TABBED NAVIGATION (replaces hamburger)
+\*-----------------------------------*/
+
+/* Hide hamburger and overlay — nav is always visible */
+.nav-toggle-btn { display: none !important; }
+.overlay        { display: none !important; }
+
+/* Override absolute/hidden navbar → inline horizontal scrollable tab bar */
+.navbar {
+  position: static !important;
+  transform: none !important;
+  visibility: visible !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex: 1;
+  min-width: 0;
+}
+.navbar::-webkit-scrollbar { display: none; }
+
+.navbar-list {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 2px;
+  padding: 0 !important;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.navbar-link {
+  color: var(--roman-silver) !important;
+  font-size: 1.1rem !important;
+  font-weight: var(--fw-700) !important;
+  padding: 5px 10px !important;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: var(--transition-1);
+  text-shadow: none !important;
+  border-bottom: 2px solid transparent;
+}
+.navbar-link:hover { color: var(--white) !important; }
+.navbar-link.page-active {
+  color: var(--accent) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+/* Fix light-mode nav colours inside the navbar */
+[data-theme="light"] .navbar-link { color: var(--roman-silver) !important; }
+[data-theme="light"] .navbar-link:hover { color: var(--white) !important; }
+
+/* Adjust header container gap */
+.header .container { gap: 12px; }
+
+/* Theme btn stays next to logo */
+.theme-btn { order: -1; margin-left: auto; }
+
+
+/*-----------------------------------*\
+  #SECTION PAGE SWITCHER
+\*-----------------------------------*/
+
+/* Hide every labelled section by default */
+[data-page] { display: none !important; }
+
+/* Show only the active section */
+[data-page].page-active { display: block !important; }
+
+/* Footer (flex layout) needs its own display value */
+footer[data-page].page-active { display: flex !important; }

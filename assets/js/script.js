@@ -188,3 +188,44 @@ themeBtn.addEventListener("click", function () {
   document.documentElement.setAttribute("data-theme", next);
   localStorage.setItem("theme", next);
 });
+
+
+
+/**
+ * SECTION / TAB NAVIGATION
+ * Shows one page-section at a time; nav links act as tabs.
+ */
+
+const pageSections = document.querySelectorAll("[data-page]");
+const navLinks     = document.querySelectorAll(".navbar-link[href]");
+
+function showPage(pageId) {
+  // hide all sections
+  pageSections.forEach(function (s) { s.classList.remove("page-active"); });
+
+  // show every element tagged with this page
+  document.querySelectorAll('[data-page="' + pageId + '"]').forEach(function (s) {
+    s.classList.add("page-active");
+  });
+
+  // mark active nav link
+  navLinks.forEach(function (link) {
+    const target = link.getAttribute("href").replace("#", "");
+    link.classList.toggle("page-active", target === pageId);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  history.replaceState(null, "", "#" + pageId);
+}
+
+// init — respect URL hash, otherwise default to home
+const initPage = location.hash ? location.hash.slice(1) : "home";
+showPage(initPage);
+
+// wire up nav clicks
+navLinks.forEach(function (link) {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    showPage(this.getAttribute("href").replace("#", ""));
+  });
+});
